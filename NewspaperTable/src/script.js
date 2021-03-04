@@ -4,24 +4,48 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import gsap from 'gsap'
 import { Vector3 } from 'three'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 /**
  * Base
  */
 // Debug
-//const gui = new dat.GUI()
+const gui = new dat.GUI()
 
 //console.log(gsap);
-let tables = []
-for (let i=0;i<10;i++){
-    tables[i]= new THREE.Group()
-} 
+let pin
+let loaded = 0
+//loading manager
+const manager = new THREE.LoadingManager();
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+
+	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+
+};
+
+manager.onLoad = function ( ) {
+
+	console.log( 'Loading complete!');
+    console.log(scene.getObjectByName('Sphere045'))
+    pin = scene.getObjectByName('Sphere045')
+    console.log(pin)
+    loaded = 1
+   // gui.add(pin, 'rotateX').min(-Math.PI).max(Math.PI * 2).step(0.001)
+    
+   animation()
+    
+
+
+};
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+const fbxLoader = new FBXLoader(manager)
 
 /**
  * Textures
@@ -54,11 +78,11 @@ const legNormalTexture = textureLoader.load('/textures/Legs/legsNormal.jpg')
 const legRoughTexture = textureLoader.load('/textures/Legs/legsRough.jpg')
 
 //floorTextures
-const floorColorTexture = textureLoader.load('/textures/Floor/floorColor.jpg')
-const floorAOTexture = textureLoader.load('/textures/Floor/floorAO.jpg')
-const floorHeightTexture = textureLoader.load('/textures/Floor/floorHeight.png')
-const floorNormalTexture = textureLoader.load('/textures/Floor/floorNormal.jpg')
-const floorRoughTexture = textureLoader.load('/textures/Floor/floorRough.jpg')
+const floorColorTexture = textureLoader.load('/textures/MarbleTiles/floorColor.jpg')
+const floorAOTexture = textureLoader.load('/textures/MarbleTiles/floorAO.jpg')
+const floorHeightTexture = textureLoader.load('/textures/MarbleTiles/floorHeight.png')
+const floorNormalTexture = textureLoader.load('/textures/MarbleTiles/floorNormal.jpg')
+const floorRoughTexture = textureLoader.load('/textures/MarbleTiles/floorRough.jpg')
 
 floorColorTexture.repeat.set(8,8)
 floorAOTexture.repeat.set(8,8)
@@ -78,6 +102,48 @@ floorHeightTexture.wrapT = THREE.RepeatWrapping
 floorNormalTexture.wrapT = THREE.RepeatWrapping
 floorRoughTexture.wrapT = THREE.RepeatWrapping
 
+//board Textures
+
+const boardColorTexture = textureLoader.load('/textures/board/boardColor.jpg')
+const boardAOTexture = textureLoader.load('/textures/board/boardAO.jpg')
+const boardHeightTexture = textureLoader.load('/textures/board/boardHeight.png')
+const boardNormalTexture = textureLoader.load('/textures/board/boardNormal.jpg')
+const boardRoughTexture = textureLoader.load('/textures/board/boardRough.jpg')
+
+//************Models */
+
+
+
+    fbxLoader.load(
+            '/models/pin.fbx',
+            (object) =>
+            {
+                const pin = object.children[2]
+                object.children[2].scale.set(.1,.1,.1)
+                //object.children[2].rotation.x = Math.PI * 0.25
+                //  object.children[2].rotation.z = Math.PI 
+                object.children[2].rotation.y = 6.2
+                //object.children[2].geometry.lookAt(tables[0].position)
+                object.children[2].position.x = 0
+                object.children[2].position.y = 2
+                object.children[2].position.z = 0
+            // console.log(object.children[2])
+                scene.add(pin)
+                //updateAllMaterials(object)
+                // gui.add(pin, 'rotation.x').min(0).max(Math.PI * 2).step(0.001)
+            
+                
+            }
+        )
+            
+  
+          
+
+
+
+
+// console.log(pin)
+    
 
 /**
  * Lights
@@ -111,7 +177,7 @@ scene.add(directionalLight)
 
 const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
 directionalLightCameraHelper.visible = false
-scene.add(directionalLightCameraHelper)
+//scene.add(directionalLightCameraHelper)
 
 // Groups
 
@@ -160,58 +226,32 @@ const legPositionX = 1.3/2 - 0.2
 const legPositionz = 3/2 - 0.2
 
 const legGeometry = new THREE.BoxBufferGeometry(0.1,1.1,0.1)
+const legMaterial = new THREE.MeshStandardMaterial({ 
+    // color: '#ff0000',
+    map: legColorTexture,
+    normalMap: legNormalTexture,
+    roughnessMap: legRoughTexture
+})
 
-const legs = new THREE.Mesh(
-    legGeometry,
-    new THREE.MeshStandardMaterial({ 
-        // color: '#ff0000',
-        map: legColorTexture,
-        normalMap: legNormalTexture,
-        roughnessMap: legRoughTexture
-    })
-)
+const legs = new THREE.Mesh(legGeometry, legMaterial)
 legs.castShadow = true
 legs.position.x = legPositionX
 legs.position.y = 0.9
 legs.position.z = legPositionz
 
-const legs2 = new THREE.Mesh(
-    legGeometry,
-    new THREE.MeshStandardMaterial({ 
-        // color: '#ff0000',
-        map: legColorTexture,
-        normalMap: legNormalTexture,
-        roughnessMap: legRoughTexture
-    })
-)
+const legs2 = new THREE.Mesh(legGeometry, legMaterial)
 legs2.castShadow = true
 legs2.position.x = -legPositionX
 legs2.position.y = 0.9
 legs2.position.z = -legPositionz
 
-const legs3 = new THREE.Mesh(
-    legGeometry,
-    new THREE.MeshStandardMaterial({ 
-        // color: '#ff0000',
-        map: legColorTexture,
-        normalMap: legNormalTexture,
-        roughnessMap: legRoughTexture
-    })
-)
+const legs3 = new THREE.Mesh(legGeometry, legMaterial)
 legs3.castShadow = true
 legs3.position.x = legPositionX
 legs3.position.y = 0.9
 legs3.position.z = -legPositionz
 
-const legs4 = new THREE.Mesh(
-    legGeometry,
-    new THREE.MeshStandardMaterial({ 
-        // color: '#ff0000',
-        map: legColorTexture,
-        normalMap: legNormalTexture,
-        roughnessMap: legRoughTexture
-    })
-)
+const legs4 = new THREE.Mesh(legGeometry, legMaterial)
 legs4.castShadow = true
 legs4.position.x = -legPositionX
 legs4.position.y = 0.9
@@ -219,13 +259,35 @@ legs4.position.z = legPositionz
 
 table1.add(legs, legs2, legs3, legs4)
 table1.rotation.y = Math.PI * 0.5
-tables[0] = table1.clone()
+
+let tables = []
+for (let i=0;i<10;i++){
+    tables[i]= new THREE.Group()
+    tables[i] = table1.clone()
+} 
+
 tables[0].position.z = -4
 scene.add(tables[0])
 
+tables[1].position.z = 4
+scene.add(tables[1])//
+
+tables[2].position.x = 4
+scene.add(tables[2])//
+
+tables[3].position.x = 4
+tables[3].position.z = -4
+scene.add(tables[3])//
+
+tables[4].position.x = 4
+tables[4].position.z = 4
+scene.add(tables[4])//
+
+//console.log(tables)
+
 //newspaper
-const newsGeometry = new THREE.PlaneGeometry(.381, .578, 2, 2)
-const letterGeometry = new THREE.PlaneGeometry(.215, .279, 2, 2) //215.9 by 279.4
+const newsGeometry = new THREE.PlaneGeometry(0.381, 0.578, 2, 2)
+const letterGeometry = new THREE.PlaneGeometry(0.215, 0.279, 2, 2) //215.9 by 279.4
 
 const new1 = new THREE.Mesh(
     newsGeometry,
@@ -319,9 +381,32 @@ meachLetter.rotation.z = - Math.PI * 0.5
 meachLetter.position.y = 1.551
 meachLetter.position.z = 0
 
+const meachLetter2 = meachLetter.clone()
+const meachNews2 = meachNews.clone()
+
+tables[1].add(meachNews2, meachLetter2)
+//tables[2].add(meachNews, meachLetter)
 tables[0].add(meachNews, meachLetter)
 
-console.log(meachNews);
+console.log(tables);
+
+//***************Investigation board */
+const board = new THREE.Group()
+const boardGeometry = new THREE.PlaneGeometry(0.5, 0.5, 2, 2)
+const boardMaterial = new THREE.MeshStandardMaterial({
+    map: boardColorTexture,
+    aoMap: boardAOTexture,
+    displacementMap: boardHeightTexture,
+    normalMap: boardNormalTexture,
+    roughnessMap: boardRoughTexture
+})
+const boardItself = new THREE.Mesh(boardGeometry,boardMaterial)
+board.add(boardItself)
+scene.add(board)
+
+board.position.x = -3
+board.position.y = 2
+board.position.z = 3
 
 
 
@@ -454,16 +539,27 @@ const clock = new THREE.Clock()
 
 let currentIntersects = null
 
-const tick = () =>
+const animation = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    
 
     raycaster.setFromCamera(mouse, camera)
 
     const objectsToTest = [table1.children[0], new1, tables[0].children[0] ]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
-    //console.log(camera);
+    // pin.rotation.y +=  0.001
+    // console.log(pin.rotation.y)
+
+    //table1.rotation.y += Math.PI * 0.01
+    
+    // for(let i =0;i<6;i++){
+    //     tables[i].rotation.y += Math.PI *0.01 * i + 0.1
+    // }
+
+   // console.log(pin);
 
     // if(intersects){
     //     console.log(intersects);
@@ -496,7 +592,12 @@ const tick = () =>
     renderer.render(scene, camera)
 
     // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
+    window.requestAnimationFrame(animation)
 }
+// window.setTimeout(() =>
+//         {
+            
 
-tick()
+//             }
+
+//         , 2000)
