@@ -110,6 +110,24 @@ const boardHeightTexture = textureLoader.load('/textures/board/boardHeight.png')
 const boardNormalTexture = textureLoader.load('/textures/board/boardNormal.jpg')
 const boardRoughTexture = textureLoader.load('/textures/board/boardRough.jpg')
 
+const boardPicElectricTheatre = textureLoader.load('/textures/board/pics/ElectricTheatre.png')
+const boardPicLouisAustin = textureLoader.load('/textures/board/pics/LouisAustin.png')
+const boardPicWatkins = textureLoader.load('/textures/board/pics/Watkins.png')
+const boardPicWatkinsHouse = textureLoader.load('/textures/board/pics/WatkinsHouse.png')
+const boardPicWonderlandTheater = textureLoader.load('/textures/board/pics/WonderlandTheater.png')
+
+const boardNoteElectricTheatre = textureLoader.load('/textures/board/notes/ElectricTheatre.jpg')
+const boardNoteLouisAustin = textureLoader.load('/textures/board/notes/LouisAustin.jpg')
+const boardNoteWatkins = textureLoader.load('/textures/board/notes/Watkins.jpg')
+const boardNoteWatkinsHouse = textureLoader.load('/textures/board/notes/WatkinsHouse.jpg')
+const boardNoteWonderlandTheater = textureLoader.load('/textures/board/notes/WonderlandTheater.jpg')
+
+const boardNoteElectricTheatreAlpha = textureLoader.load('/textures/board/notes/ElectricTheatreAlphaMap.jpg')
+const boardNoteLouisAustinAlpha = textureLoader.load('/textures/board/notes/LouisAustinAlphaMap.jpg')
+const boardNoteWatkinsAlpha = textureLoader.load('/textures/board/notes/WatkinsAlphaMap.jpg')
+const boardNoteWatkinsHouseAlpha = textureLoader.load('/textures/board/notes/WatkinsHouseAlphaMap.jpg')
+const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/notes/WonderlandTheaterAlphaMap.jpg')
+
 //************Models */
 
 
@@ -392,22 +410,129 @@ console.log(tables);
 
 //***************Investigation board */
 const board = new THREE.Group()
-const boardGeometry = new THREE.PlaneGeometry(0.5, 0.5, 2, 2)
+const boardGeometry = new THREE.PlaneGeometry(1.828, 1.219)
 const boardMaterial = new THREE.MeshStandardMaterial({
     map: boardColorTexture,
     aoMap: boardAOTexture,
-    displacementMap: boardHeightTexture,
+    //displacementMap: boardHeightTexture,
     normalMap: boardNormalTexture,
-    roughnessMap: boardRoughTexture
+    roughnessMap: boardRoughTexture,
+    side: THREE.DoubleSide
+    
 })
 const boardItself = new THREE.Mesh(boardGeometry,boardMaterial)
+
 board.add(boardItself)
 scene.add(board)
 
-board.position.x = -3
+board.position.x = -4
 board.position.y = 2
 board.position.z = 3
 
+
+const boardElectricTheatreGeometry = new THREE.PlaneGeometry(0.35 * 1.1486, 0.35 )
+const boardLouisAustinGeometry = new THREE.PlaneGeometry(0.35 * 1.054, 0.35 )
+const boardWatkinsGeometry = new THREE.PlaneGeometry(0.35 * 1.302, 0.35)
+const boardWatkinsHouseGeometry = new THREE.PlaneGeometry(0.35 * 1.42, 0.35)
+const boardWonderlandTheaterGeometry = new THREE.PlaneGeometry(0.35 * 1.1438, 0.35)
+
+const boardElectricTheatreMaterial = new THREE.MeshStandardMaterial({
+    map: boardPicElectricTheatre
+})
+const boardLouisAustinMaterial = new THREE.MeshStandardMaterial({
+    map: boardPicLouisAustin
+})
+const boardWatkinsMaterial = new THREE.MeshStandardMaterial({
+    map: boardPicWatkins
+})
+const boardWatkinsHouseMaterial = new THREE.MeshStandardMaterial({
+    map: boardPicWatkinsHouse
+})
+const boardWonderlandTheaterMaterial = new THREE.MeshStandardMaterial({
+    map: boardPicWonderlandTheater
+})
+const boardElectricTheatreMesh = new THREE.Mesh(boardElectricTheatreGeometry, boardElectricTheatreMaterial)
+const boardLouisAustinMesh = new THREE.Mesh(boardLouisAustinGeometry, boardLouisAustinMaterial)
+const boardWatkinsMesh = new THREE.Mesh(boardWatkinsGeometry, boardWatkinsMaterial)
+const boardWatkinsHouseMesh = new THREE.Mesh(boardWatkinsHouseGeometry, boardWatkinsHouseMaterial)
+const boardWonderlandTheaterMesh = new THREE.Mesh(boardWonderlandTheaterGeometry, boardWonderlandTheaterMaterial)
+
+board.add(boardElectricTheatreMesh, boardLouisAustinMesh, boardWatkinsMesh,boardWatkinsHouseMesh, boardWonderlandTheaterMesh )
+
+boardElectricTheatreMesh.position.z = 0.001
+boardElectricTheatreMesh.position.x = 0.35
+boardElectricTheatreMesh.position.y = -0.25
+boardLouisAustinMesh.position.z = 0.001
+boardLouisAustinMesh.position.x = -0.05
+boardLouisAustinMesh.position.y = 0.1
+boardWatkinsMesh.position.z = 0.001
+boardWatkinsMesh.position.x = -0.5
+boardWatkinsMesh.position.y = 0.4
+boardWatkinsHouseMesh.position.z = 0.001
+boardWatkinsHouseMesh.position.x = -0.3
+boardWatkinsHouseMesh.position.y = -0.3
+boardWonderlandTheaterMesh.position.z = 0.001
+boardWonderlandTheaterMesh.position.x = 0.55
+boardWonderlandTheaterMesh.position.y = 0.3
+
+//NOTES
+const boardNoteElectricTheatreGeometry = new THREE.PlaneGeometry(0.15, 0.15 )
+const boardNoteLouisAustinGeometry = new THREE.PlaneGeometry(0.16 * 1.3, 0.16 )
+const boardNoteWatkinsGeometry = new THREE.PlaneGeometry(0.15 * 1.3, 0.15)
+const boardNoteWatkinsHouseGeometry = new THREE.PlaneGeometry(0.13 * 1.3, 0.13)
+const boardNoteWonderlandTheaterGeometry = new THREE.PlaneGeometry(0.15, 0.15)
+
+const boardNoteElectricTheatreMaterial = new THREE.MeshStandardMaterial({
+    map: boardNoteElectricTheatre,
+    alphaMap: boardNoteElectricTheatreAlpha,
+    transparent: true
+})
+const boardNoteLouisAustinMaterial = new THREE.MeshStandardMaterial({
+    map: boardNoteLouisAustin,
+    alphaMap: boardNoteLouisAustinAlpha,
+    transparent: true
+})
+const boardNoteWatkinsMaterial = new THREE.MeshStandardMaterial({
+    map: boardNoteWatkins,
+    alphaMap: boardNoteWatkinsAlpha,
+    transparent: true
+})
+const boardNoteWatkinsHouseMaterial = new THREE.MeshStandardMaterial({
+    map: boardNoteWatkinsHouse,
+    alphaMap: boardNoteWatkinsHouseAlpha,
+    transparent: true
+})
+const boardNoteWonderlandTheaterMaterial = new THREE.MeshStandardMaterial({
+    map: boardNoteWonderlandTheater,
+    alphaMap: boardNoteWonderlandTheaterAlpha,
+    transparent: true
+})
+const boardNoteElectricTheatreMesh = new THREE.Mesh(boardNoteElectricTheatreGeometry, boardNoteElectricTheatreMaterial)
+const boardNoteLouisAustinMesh = new THREE.Mesh(boardNoteLouisAustinGeometry, boardNoteLouisAustinMaterial)
+const boardNoteWatkinsMesh = new THREE.Mesh(boardNoteWatkinsGeometry, boardNoteWatkinsMaterial)
+const boardNoteWatkinsHouseMesh = new THREE.Mesh(boardNoteWatkinsHouseGeometry, boardNoteWatkinsHouseMaterial)
+const boardNoteWonderlandTheaterMesh = new THREE.Mesh(boardNoteWonderlandTheaterGeometry, boardNoteWonderlandTheaterMaterial)
+
+board.add(boardNoteElectricTheatreMesh, boardNoteLouisAustinMesh, boardNoteWatkinsMesh,boardNoteWatkinsHouseMesh, boardNoteWonderlandTheaterMesh )
+
+boardNoteElectricTheatreMesh.position.z = 0.002
+boardNoteElectricTheatreMesh.position.x = 0.35
+boardNoteElectricTheatreMesh.position.y = -0.25
+boardNoteLouisAustinMesh.position.z = 0.002
+boardNoteLouisAustinMesh.position.x = -0.05
+boardNoteLouisAustinMesh.position.y = 0.1
+boardNoteWatkinsMesh.position.z = 0.002
+boardNoteWatkinsMesh.position.x = -0.5
+boardNoteWatkinsMesh.position.y = 0.2
+boardNoteWatkinsHouseMesh.position.z = 0.002
+boardNoteWatkinsHouseMesh.position.x = -0.35
+boardNoteWatkinsHouseMesh.position.y = -0.3
+boardNoteWonderlandTheaterMesh.position.z = 0.002
+boardNoteWonderlandTheaterMesh.position.x = 0.55
+boardNoteWonderlandTheaterMesh.position.y = 0.3
+
+
+console.log(board)
 
 
 /**
@@ -474,14 +599,30 @@ window.addEventListener('click', () => {
         } else if (currentIntersects.object === tables[0].children[0]){
             //camera.rotation.set(new THREE.Vector3( 0,0,0 ))
             
-            // gsap.to(camera.position, { duration: 1, x: -0.07395607030251031, y: 3.0000040370923107, z: -4.036922484469257})
-            // gsap.to(camera.rotation, { duration: 1, x: -1.5707953267504582, y: -1.4537220037501904e-10, z: -0.00014536573950488704})
-            //  camera.lookAt(tables[0].children[0])
+            // gsap.to(camera.position, { duration: 3, x: 0, y: 3, z: -4})
+            // // gsap.to(camera.rotation, { duration: 1, x: -1.5707953267504582, y: -1.4537220037501904e-10, z: -0.00014536573950488704})
+            // camera.lookAt(tables[0].children[0])
             // camera.updateProjectionMatrix()
             //camera.rotation.set(new THREE.Vector3(-1.57, 0, 0))
             
-            console.log(tables[0].children[0]);
-        } 
+            //console.log(tables[0].children[0]);
+        } else if (currentIntersects.object === board.children[0]){
+            console.log(camera)
+            
+
+            gsap.to(camera.position, { duration: 1, x: -4, y:2, z:4 })
+            
+            camera.setRotationFromQuaternion({
+                w: 0.9999950499076224,
+                x: -0.002454490139654982,
+                y: -0.0019686581869151018,
+                z: -0.000004832076027356882})
+            //gsap.to(camera.rotatation, { duration: 5, y: Math.PI * 0.5})
+            //camera.rotation.set(new THREE.Vector3(-4, 2, 0))
+                camera.updateProjectionMatrix()
+
+
+        }
 
     } else {
         // camera.lookAt(new Vector3(0,0,0))
@@ -547,19 +688,11 @@ const animation = () =>
 
     raycaster.setFromCamera(mouse, camera)
 
-    const objectsToTest = [table1.children[0], new1, tables[0].children[0] ]
+    const objectsToTest = [ table1.children[0], new1, tables[0].children[0], board.children[0] ]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
     // pin.rotation.y +=  0.001
     // console.log(pin.rotation.y)
-
-    //table1.rotation.y += Math.PI * 0.01
-    
-    // for(let i =0;i<6;i++){
-    //     tables[i].rotation.y += Math.PI *0.01 * i + 0.1
-    // }
-
-   // console.log(pin);
 
     // if(intersects){
     //     console.log(intersects);
@@ -586,10 +719,11 @@ const animation = () =>
     }
     
     // Update controls
-    controls.update()
-
+   // controls.update()
+  
     // Render
     renderer.render(scene, camera)
+    
 
     // Call tick again on the next frame
     window.requestAnimationFrame(animation)
