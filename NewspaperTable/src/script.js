@@ -136,19 +136,29 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
             '/models/pin.fbx',
             (object) =>
             {
-                const pin = object.children[2]
-                object.children[2].scale.set(.1,.1,.1)
-                //object.children[2].rotation.x = Math.PI * 0.25
-                //  object.children[2].rotation.z = Math.PI 
-                object.children[2].rotation.y = 6.2
-                //object.children[2].geometry.lookAt(tables[0].position)
-                object.children[2].position.x = 0
-                object.children[2].position.y = 2
-                object.children[2].position.z = 0
-            // console.log(object.children[2])
-                scene.add(pin)
-                //updateAllMaterials(object)
-                // gui.add(pin, 'rotation.x').min(0).max(Math.PI * 2).step(0.001)
+                const pin1 = object.children[15]
+                pin1.scale.set(.1,.1,.1)
+                pin1.rotation.y = -1.35
+                pin1.rotation.x = 0.1
+                pin1.position.x = -4
+                pin1.position.y = 2
+                pin1.position.z = 3.1
+
+                const pin2 = pin1.clone()
+                pin2.position.x = -4.3
+                pin2.position.y = 2.5
+                pin2.rotation.x = 0.4
+                const pin3 = pin1.clone()
+                pin3.position.x = -4.3
+                pin3.position.y = 1.5
+                const pin4 = pin1.clone()
+                pin4.position.x = -3.5
+                pin4.position.y = 2.5
+                const pin5 = pin1.clone()
+                pin5.position.x = -3.5
+                pin5.position.y = 1.7
+
+                board.add(pin1, pin2, pin3, pin4, pin5)
             
                 
             }
