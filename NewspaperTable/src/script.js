@@ -158,8 +158,15 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
                 const pin5 = pin1.clone()
                 pin5.position.x = -3.5
                 pin5.position.y = 1.7
+                //need to add the pins to the board, rather than the scene
+                //but need to reorient the position relative to the board
 
                 scene.add(pin1, pin2, pin3, pin4, pin5)
+
+<<<<<<< HEAD
+                scene.add(pin1, pin2, pin3, pin4, pin5)
+=======
+>>>>>>> 523bd20aba17fc9888bc2bb995b1817bfd5e0cfe
             
                 
             }
