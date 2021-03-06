@@ -137,12 +137,12 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
             (object) =>
             {
                 const pin1 = object.children[15]
-                pin1.scale.set(.1,.1,.1)
+                pin1.scale.set(0.05,0.05,0.05)
                 pin1.rotation.y = -1.35
                 pin1.rotation.x = 0.1
                 pin1.position.x = -4
                 pin1.position.y = 2
-                pin1.position.z = 3.1
+                pin1.position.z = 3.09
 
                 const pin2 = pin1.clone()
                 pin2.position.x = -4.3
@@ -154,11 +154,12 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
                 const pin4 = pin1.clone()
                 pin4.position.x = -3.5
                 pin4.position.y = 2.5
+                pin4.rotation.x = 0.4
                 const pin5 = pin1.clone()
                 pin5.position.x = -3.5
                 pin5.position.y = 1.7
 
-                board.add(pin1, pin2, pin3, pin4, pin5)
+                scene.add(pin1, pin2, pin3, pin4, pin5)
             
                 
             }
