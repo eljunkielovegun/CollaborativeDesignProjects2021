@@ -138,35 +138,33 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
             {
                 const pin1 = object.children[15]
                 pin1.scale.set(0.05,0.05,0.05)
-                pin1.rotation.y = -1.35
-                pin1.rotation.x = 0.1
-                pin1.position.x = -4
-                pin1.position.y = 2
-                pin1.position.z = 3.09
+                pin1.rotation.y = -1.5
+                // pin1.rotation.x = 0.35
+                pin1.position.x = boardNoteElectricTheatreMesh.position.x
+                pin1.position.y = boardNoteElectricTheatreMesh.position.y
+                pin1.position.z = 0.091
 
                 const pin2 = pin1.clone()
-                pin2.position.x = -4.3
-                pin2.position.y = 2.5
+                pin2.position.x = boardNoteLouisAustinMesh.position.x
+                pin2.position.y = boardNoteLouisAustinMesh.position.y
                 pin2.rotation.x = 0.4
                 const pin3 = pin1.clone()
-                pin3.position.x = -4.3
-                pin3.position.y = 1.5
+                pin3.position.x = boardNoteWatkinsMesh.position.x
+                pin3.position.y = boardNoteWatkinsMesh.position.y
                 const pin4 = pin1.clone()
-                pin4.position.x = -3.5
-                pin4.position.y = 2.5
+                pin4.position.x = boardNoteWatkinsHouseMesh.position.x 
+                pin4.position.y = boardNoteWatkinsHouseMesh.position.y 
                 pin4.rotation.x = 0.4
                 const pin5 = pin1.clone()
-                pin5.position.x = -3.5
-                pin5.position.y = 1.7
+                pin5.position.x = boardNoteWonderlandTheaterMesh.position.x 
+                pin5.position.y = boardNoteWonderlandTheaterMesh.position.y
                 //need to add the pins to the board, rather than the scene
                 //but need to reorient the position relative to the board
 
-                scene.add(pin1, pin2, pin3, pin4, pin5)
+                board.add(pin1, pin2, pin3, pin4, pin5)
 
-<<<<<<< HEAD
-                scene.add(pin1, pin2, pin3, pin4, pin5)
-=======
->>>>>>> 523bd20aba17fc9888bc2bb995b1817bfd5e0cfe
+            
+                
             
                 
             }
