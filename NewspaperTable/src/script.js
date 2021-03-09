@@ -548,8 +548,15 @@ boardNoteWonderlandTheaterMesh.position.x = 0.55
 boardNoteWonderlandTheaterMesh.position.y = 0.3
 
 
-console.log(board)
+// string
 
+const stringGeometry = new THREE.CylinderGeometry(0.001, 0.001,boardNoteElectricTheatreMesh.position.distanceTo(boardNoteLouisAustinMesh.position), 32 )
+const stringMaterial = new THREE.MeshStandardMaterial({ color: '#ff0000' })
+const stringMesh = new THREE.Mesh(stringGeometry, stringMaterial)
+board.add(stringMesh)
+stringMesh.position.z = 0.003
+stringMesh.position.x = boardNoteElectricTheatreMesh.position.x
+stringMesh.position.y = boardNoteLouisAustinMesh.position.y
 
 /**
  * Sizes
