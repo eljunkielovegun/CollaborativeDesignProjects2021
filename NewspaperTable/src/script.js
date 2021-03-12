@@ -164,7 +164,8 @@ const boardNoteWonderlandTheaterAlpha = textureLoader.load('/textures/board/note
                 board.add(pin1, pin2, pin3, pin4, pin5)
 
             
-                
+                console.log(pin1)
+                console.log(pin2)
             
                 
             }
@@ -551,13 +552,19 @@ boardNoteWonderlandTheaterMesh.position.y = 0.3
 // string
 
 const stringGeometry = new THREE.CylinderGeometry(0.001, 0.001,boardNoteElectricTheatreMesh.position.distanceTo(boardNoteLouisAustinMesh.position), 32 )
+// const stringGeometry = new THREE.Line3(boardNoteElectricTheatreMesh.position, boardNoteLouisAustinMesh.position)
 const stringMaterial = new THREE.MeshStandardMaterial({ color: '#ff0000' })
 const stringMesh = new THREE.Mesh(stringGeometry, stringMaterial)
 board.add(stringMesh)
 stringMesh.position.z = 0.003
-stringMesh.position.x = boardNoteElectricTheatreMesh.position.x
-stringMesh.position.y = boardNoteLouisAustinMesh.position.y
 
+stringMesh.position.x = boardNoteElectricTheatreMesh.position.x 
+stringMesh.position.y = boardNoteLouisAustinMesh.position.y 
+stringMesh.rotation.z = boardNoteElectricTheatreMesh.position.angleTo(boardNoteLouisAustinMesh.position)
+
+// gui.add(stringMesh.position, 'x').min(-2).max(2).step(0.001)
+// gui.add(stringMesh.position, 'y').min(-2).max(2).step(0.001)
+// gui.add(stringMesh.rotation, 'z').min(-2).max(2).step(0.001)
 /**
  * Sizes
  */
