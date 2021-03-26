@@ -11,11 +11,6 @@ module.exports = {
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
-    resolve: {
-        alias:{
-            'mapbox-gl' : path.resolve('./node_modules/mapbox-gl/dist/mapboxgl.js')
-        }
-    },
     plugins:
     [
         new CopyWebpackPlugin({
@@ -96,20 +91,7 @@ module.exports = {
                 use: [
                     'raw-loader'
                 ]
-            },
-            //mapbox
-            {
-                test: /\.js$/,
-                include: path.resolve('node_modules/mapbox-gl-shaders/index.js'),
-                loader: 'transform/cacheable?brfs'
-              }],
-              
-              postLoaders: [{
-                include: /node_modules\/mapbox-gl-shaders/,
-                loader: 'transform',
-                query: 'brfs'
-              }]
-            
-        
+            }
+        ]
     }
 }
