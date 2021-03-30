@@ -12,8 +12,7 @@ const map = new mapboxgl.Map({
 });
 
 console.log(map)
-var mapDiv = document.getElementById('map');
-// console.log(mapDiv)
+
 
 
 //console.log(mapboxgl)
