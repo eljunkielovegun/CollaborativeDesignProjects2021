@@ -29,24 +29,31 @@ map.on('load', function () {
 // 	}
 // });
 
-fetch('WhiteMobViolence.csv')
-.then(response => response.text() )
-.then(csvString => {
-    console.log(csvString)
-    //Split the csv into rows
-    //const rows = csvString.split('\n');
-    //for (const row of rows) {
-    //Split the row into each of the comma separated values
-        //console.log(row.split(","));
+let data =[]
+
+const formData = new FormData()
+
+fetch('WhiteMobViolence.json')
+.then(response => response.json() )
+.then(result => {
+    // console.log('Success:', result);
+    data = result
+    makeMarkers()
+    
+  })
+.catch((error) => {
+    console.error('Error:', error);
+  });
+
+//console.log(data)
+
+function makeMarkers() {
+    for(let obj in data){
+        obj = data[obj]
+        
+        console.log(obj.Name)
     }
-});
-
-
-
-const mapDiv = document.getElementById('map')
-mapDiv.style.height = sizes.height
-console.log(mapDiv)
-
-
+    
+}
 
 //console.log(mapboxgl)
