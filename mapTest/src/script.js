@@ -1,5 +1,6 @@
 import mapboxgl from 'mapbox-gl'
 import * as THREE from 'three'
+import Papa from 'papaparse'
 
 //console.log(mapboxgl)
 const sizes = {
@@ -22,10 +23,24 @@ map.on('load', function () {
     map.resize()
 });
  
+// const csv = Papa.parse('./WhiteMobViolence.csv', {
+// 	complete: function(results) {
+// 		console.log(results.data);
+// 	}
+// });
 
+fetch('WhiteMobViolence.csv')
+.then(response => response.text() )
+.then(csvString => {
+    console.log(csvString)
+    //Split the csv into rows
+    //const rows = csvString.split('\n');
+    //for (const row of rows) {
+    //Split the row into each of the comma separated values
+        //console.log(row.split(","));
+    }
+});
 
-
-    //console.log(mapContainer[0].style.height)
 
 
 const mapDiv = document.getElementById('map')
