@@ -33,7 +33,7 @@ const loadingManager = new THREE.LoadingManager(
         loadingBarElement.style.transform = `scaleX(${progressRatio})`
     }
 )
-const gltfLoader = new GLTFLoader(loadingManager)
+// const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const textureLoader = new THREE.TextureLoader(loadingManager)
 
@@ -96,56 +96,75 @@ const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
 scene.add(overlay)
 
 /**
+ * postcards
+ */
+
+const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
+
+const postcardDurhamBWMaterial = new THREE.MeshStandardMaterial({ 
+    side: THREE.DoubleSide,
+    color: '#ff0000'
+    
+})
+const postcardMesh = new THREE.Mesh( postcardGeometry, postcardDurhamBWMaterial)
+
+
+scene.add(postcardMesh)
+
+
+scene.background = new THREE.Color( 0xffffff )
+/**
+ * 
  * Update all materials
  */
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
-        {
-            // child.material.envMap = environmentMap
-            child.material.envMapIntensity = debugObject.envMapIntensity
-            child.material.needsUpdate = true
-            child.castShadow = true
-            child.receiveShadow = true
-        }
-    })
-}
+// const updateAllMaterials = () =>
+// {
+//     scene.traverse((child) =>
+//     {
+//         if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+//         {
+//             // child.material.envMap = environmentMap
+//             child.material.envMapIntensity = debugObject.envMapIntensity
+//             child.material.needsUpdate = true
+//             child.castShadow = true
+//             child.receiveShadow = true
+//         }
+//     })
+// }
 
 /**
  * Environment map
  */
-const environmentMap = cubeTextureLoader.load([
-    '/textures/environmentMaps/0/px.jpg',
-    '/textures/environmentMaps/0/nx.jpg',
-    '/textures/environmentMaps/0/py.jpg',
-    '/textures/environmentMaps/0/ny.jpg',
-    '/textures/environmentMaps/0/pz.jpg',
-    '/textures/environmentMaps/0/nz.jpg'
-])
+// const environmentMap = cubeTextureLoader.load([
+//     '/textures/environmentMaps/0/px.png',
+//     '/textures/environmentMaps/0/nx.png',
+//     '/textures/environmentMaps/0/py.png',
+//     '/textures/environmentMaps/0/ny.png',
+//     '/textures/environmentMaps/0/pz.png',
+//     '/textures/environmentMaps/0/nz.png'
+// ])
 
-environmentMap.encoding = THREE.sRGBEncoding
+// environmentMap.encoding = THREE.sRGBEncoding
 
-scene.background = environmentMap
-scene.environment = environmentMap
+// scene.background = environmentMap
+// scene.environment = environmentMap
 
-debugObject.envMapIntensity = 5
+// debugObject.envMapIntensity = 5
 
 /**
  * Models
  */
-gltfLoader.load(
-    '/models/DamagedHelmet/glTF/DamagedHelmet.gltf',
-    (gltf) =>
-    {
-        gltf.scene.scale.set(2.5, 2.5, 2.5)
-        gltf.scene.rotation.y = Math.PI * 0.5
-        scene.add(gltf.scene)
+// gltfLoader.load(
+//     '/models/DamagedHelmet/glTF/DamagedHelmet.gltf',
+//     (gltf) =>
+//     {
+//         gltf.scene.scale.set(2.5, 2.5, 2.5)
+//         gltf.scene.rotation.y = Math.PI * 0.5
+//         scene.add(gltf.scene)
 
-        updateAllMaterials()
-    }
-)
+//         updateAllMaterials()
+//     }
+// )
 
 /**
  * Lights
@@ -188,7 +207,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(4, 1, - 4)
+camera.position.set(0, 0, - 4)
 scene.add(camera)
 
 /**
