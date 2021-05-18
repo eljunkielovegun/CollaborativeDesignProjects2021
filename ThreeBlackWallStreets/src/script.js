@@ -22,6 +22,7 @@ const loadingManager = new THREE.LoadingManager(
             loadingBarElement.classList.add('ended')
             loadingBarElement.style.transform = ''
         }, 500)
+        console.log(durhamPostcardBW)
     },
 
     // Progress
@@ -34,6 +35,24 @@ const loadingManager = new THREE.LoadingManager(
 )
 const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
+const textureLoader = new THREE.TextureLoader(loadingManager)
+
+// loading textures:
+
+/**
+ * postcard bw
+ */
+const durhamPostcardBW = textureLoader.load('/postcardBW/durham.png')
+const richmondPostcardBW = textureLoader.load('/postcardBW/richmond.png')
+const tulsaPostcardBW = textureLoader.load('/postcardBW/tulsa.png')
+/**
+ * postcard bw
+ */
+const durhamPostcardColor = textureLoader.load('/postcardColor/durham.jpg')
+const richmondPostcardColor = textureLoader.load('/postcardColor/richmond.jpg')
+const tulsaPostcardColor = textureLoader.load('/postcardColor/tulsa.jpg')
+
+
 
 /**
  * Base
@@ -147,6 +166,8 @@ const sizes = {
     height: window.innerHeight
 }
 
+const raycaster = new THREE.Raycaster()
+
 window.addEventListener('resize', () =>
 {
     // Update sizes
@@ -170,6 +191,42 @@ const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 
 camera.position.set(4, 1, - 4)
 scene.add(camera)
 
+/**
+ * MOUSE
+ */
+const mouse = new THREE.Vector2()
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX/sizes.width * 2 -1
+    mouse.y = -(e.clientY/sizes.height * 2 -1)
+    
+})
+
+window.addEventListener('click', () => {
+  
+    if(currentIntersects){
+       // console.log(currentIntersects);
+        if(currentIntersects.object === null){
+            
+           
+        } else if (currentIntersects.object === null) {   
+            // gsap.to(camera.position, { duration: 1, x: 0, y:1.85, z:0})
+            
+        } else if (currentIntersects.object === null){
+            
+        } else if (currentIntersects.object === null){
+
+        }
+
+    } else {
+        // camera.lookAt(new Vector3(0,0,0))
+        // camera.position.x = 4
+        // camera.position.y = 2
+        // camera.position.z = 5
+    }
+    
+
+})
+
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
@@ -190,6 +247,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+let currentIntersects = null
+
 /**
  * Animate
  */
@@ -197,6 +256,39 @@ const tick = () =>
 {
     // Update controls
     controls.update()
+
+    raycaster.setFromCamera(mouse, camera)
+
+
+    const objectsToTest = [  ]
+    const intersects = raycaster.intersectObjects(objectsToTest)
+
+    // pin.rotation.y +=  0.001
+    // console.log(pin.rotation.y)
+
+    // if(intersects){
+    //     console.log(intersects);
+    // }
+   
+    // for(const thing of objectsToTest){
+    //     thing.material.color.set('#ffffff')
+    // }
+    // for(const intersect of intersects){
+    //     intersect.object.material.color.set('#00ff00')
+    // }
+
+    if(intersects.length){
+        if(currentIntersects === null){
+            console.log('in');
+        }
+        currentIntersects = intersects[0]
+       //console.log(intersects.object);
+    } else {
+        if(currentIntersects){
+            console.log('out');
+        }
+        currentIntersects = null
+    }
 
     // Render
     renderer.render(scene, camera)
