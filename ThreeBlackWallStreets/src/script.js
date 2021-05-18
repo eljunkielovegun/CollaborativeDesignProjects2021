@@ -102,14 +102,26 @@ scene.add(overlay)
 const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
 
 const postcardDurhamBWMaterial = new THREE.MeshStandardMaterial({ 
-    side: THREE.DoubleSide,
-    color: '#ff0000'
+    
+    map: durhamPostcardBW
     
 })
-const postcardMesh = new THREE.Mesh( postcardGeometry, postcardDurhamBWMaterial)
+const postcardDurhamColorMaterial = new THREE.MeshStandardMaterial({ 
+    side: THREE.DoubleSide,
+    map: durhamPostcardColor
+    
+})
 
 
-scene.add(postcardMesh)
+const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamColorMaterial )
+
+
+
+
+
+
+
+scene.add(postcardDurhamMesh)
 
 
 scene.background = new THREE.Color( 0xffffff )
@@ -177,6 +189,10 @@ directionalLight.shadow.normalBias = 0.05
 directionalLight.position.set(0.25, 3, - 2.25)
 scene.add(directionalLight)
 
+const ambientLight = new THREE.AmbientLight(0x404040, 2.0)
+// gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
+scene.add(ambientLight)
+
 /**
  * Sizes
  */
@@ -207,7 +223,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(0, 0, - 4)
+camera.position.set(0, 0, 4)
 scene.add(camera)
 
 /**
