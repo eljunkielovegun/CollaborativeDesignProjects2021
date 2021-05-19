@@ -3,6 +3,23 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
+import * as dat from 'dat.gui'
+
+const params = {
+    exposure: 1.0,
+    toneMapping: 'ACESFilmic'
+};
+
+const toneMappingOptions = {
+    None: THREE.NoToneMapping,
+    Linear: THREE.LinearToneMapping,
+    Reinhard: THREE.ReinhardToneMapping,
+    Cineon: THREE.CineonToneMapping,
+    ACESFilmic: THREE.ACESFilmicToneMapping,
+};
+
+const gui = new dat.GUI()
+let guiExposure = null
 
 /**
  * Loaders
@@ -124,7 +141,7 @@ const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamColor
 scene.add(postcardDurhamMesh)
 
 
-scene.background = new THREE.Color( 0xffffff )
+scene.background = new THREE.Color( 0x404040 )
 /**
  * 
  * Update all materials
@@ -189,7 +206,7 @@ directionalLight.shadow.normalBias = 0.05
 directionalLight.position.set(0.25, 3, - 2.25)
 scene.add(directionalLight)
 
-const ambientLight = new THREE.AmbientLight(0x404040, 2.0)
+const ambientLight = new THREE.AmbientLight(0xffffff, 2.0)
 // gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
 scene.add(ambientLight)
 
@@ -275,14 +292,28 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.physicallyCorrectLights = true
 renderer.outputEncoding = THREE.sRGBEncoding
-renderer.toneMapping = THREE.ReinhardToneMapping
-renderer.toneMappingExposure = 3
+renderer.toneMapping = THREE.LinearToneMapping
+renderer.toneMappingExposure = 1.3
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 let currentIntersects = null
+
+// gui.add( params, 'toneMapping', Object.keys( toneMappingOptions )).onChange( function () {
+
+//                 updateGUI();
+
+//                 renderer.toneMapping = toneMappingOptions[ params.toneMapping ];
+//                 postcardDurhamMesh.material.needsUpdate = true;
+//                 renderer.render(scene, camera);
+
+//             } );
+
+//             updateGUI();
+
+//             gui.open();
 
 /**
  * Animate
@@ -295,7 +326,7 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
 
-    const objectsToTest = [  ]
+    const objectsToTest = [ postcardDurhamMesh ]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
     // pin.rotation.y +=  0.001
@@ -315,12 +346,14 @@ const tick = () =>
     if(intersects.length){
         if(currentIntersects === null){
             console.log('in');
+            postcardDurhamMesh.material= postcardDurhamBWMaterial
         }
         currentIntersects = intersects[0]
        //console.log(intersects.object);
     } else {
         if(currentIntersects){
             console.log('out');
+            postcardDurhamMesh.material= postcardDurhamColorMaterial
         }
         currentIntersects = null
     }
@@ -331,5 +364,20 @@ const tick = () =>
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 }
+
+// function updateGUI() {
+
+//     if ( guiExposure !== null ) {
+//         gui.remove( guiExposure );
+//         guiExposure = null;
+//     }
+//     if ( params.toneMapping !== 'None' ) {
+//         guiExposure = gui.add( params, 'exposure', 0, 2 ).onChange( function () {
+//                 renderer.toneMappingExposure = params.exposure;
+//                 renderer.render(scene, camera)
+
+//             } );
+//     }
+// }
 
 tick()
