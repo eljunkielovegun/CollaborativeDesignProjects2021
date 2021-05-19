@@ -113,27 +113,27 @@ const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
 scene.add(overlay)
 
 /**
- * postcards
+ * City postcards
  */
 
 const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
 
 const postcardDurhamMaterial = new THREE.MeshStandardMaterial({ 
-    
     map: durhamPostcardBW
-    
 })
-
-
 const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamMaterial )
 
+const postcardTulsaMaterial = new THREE.MeshStandardMaterial({ 
+    map: tulsaPostcardBW
+})
+const postcardTulsaMesh = new THREE.Mesh( postcardGeometry, postcardTulsaMaterial )
 
+const postcardRichmondMaterial = new THREE.MeshStandardMaterial({ 
+    map: richmondPostcardBW
+})
+const postcardRichmondMesh = new THREE.Mesh( postcardGeometry, postcardRichmondMaterial )
 
-
-
-
-
-scene.add(postcardDurhamMesh)
+scene.add(postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
 
 
 scene.background = new THREE.Color( 0x404040 )
@@ -235,7 +235,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(0, 0, 4)
+camera.position.set(0, 0, 6)
 scene.add(camera)
 
 /**
@@ -321,7 +321,7 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
 
-    const objectsToTest = [ postcardDurhamMesh ]
+    const objectsToTest = [ postcardDurhamMesh, postcardRichmondMesh, postcardTulsaMesh ]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
     // pin.rotation.y +=  0.001
@@ -339,9 +339,14 @@ const tick = () =>
     // }
 
     if(intersects.length){
+        postcardDurhamMesh.material.map= durhamPostcardBW
+            postcardRichmondMesh.material.map= richmondPostcardBW
+            postcardTulsaMesh.material.map= tulsaPostcardBW
         if(currentIntersects === null){
             console.log('in');
             postcardDurhamMesh.material.map= durhamPostcardColor
+            postcardRichmondMesh.material.map= richmondPostcardColor
+            postcardTulsaMesh.material.map= tulsaPostcardColor
         }
         currentIntersects = intersects[0]
        //console.log(intersects.object);
@@ -349,6 +354,8 @@ const tick = () =>
         if(currentIntersects){
             console.log('out');
             postcardDurhamMesh.material.map= durhamPostcardBW
+            postcardRichmondMesh.material.map= richmondPostcardBW
+            postcardTulsaMesh.material.map= tulsaPostcardBW
         }
         currentIntersects = null
     }
