@@ -122,16 +122,19 @@ const postcardDurhamMaterial = new THREE.MeshStandardMaterial({
     map: durhamPostcardBW
 })
 const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamMaterial )
+postcardDurhamMesh.name = 'durhamPostcard'
 
 const postcardTulsaMaterial = new THREE.MeshStandardMaterial({ 
     map: tulsaPostcardBW
 })
 const postcardTulsaMesh = new THREE.Mesh( postcardGeometry, postcardTulsaMaterial )
+postcardTulsaMesh.name = 'tulsaPostcard'
 
 const postcardRichmondMaterial = new THREE.MeshStandardMaterial({ 
     map: richmondPostcardBW
 })
 const postcardRichmondMesh = new THREE.Mesh( postcardGeometry, postcardRichmondMaterial )
+postcardRichmondMesh.name = 'richmondPostcard'
 
 postcardTulsaMesh.position.x = -7
 postcardRichmondMesh.position.x = 7
@@ -244,7 +247,7 @@ scene.add(camera)
 /**
  * MOUSE
  */
-const mouse = new THREE.Vector2()
+const mouse = new THREE.Vector2(0,0)
 window.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX/sizes.width * 2 -1
     mouse.y = -(e.clientY/sizes.height * 2 -1)
@@ -298,6 +301,7 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 let currentIntersects = null
+let placeholder = new THREE.Object3D // this is a hack so that the default of the raycaster doesnt start trigered
 
 // gui.add( params, 'toneMapping', Object.keys( toneMappingOptions )).onChange( function () {
 
@@ -324,25 +328,38 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
 
-    const objectsToTest = [ postcardDurhamMesh, postcardRichmondMesh, postcardTulsaMesh ]
+    const objectsToTest = [ placeholder, postcardDurhamMesh, postcardRichmondMesh, postcardTulsaMesh ]
     const intersects = raycaster.intersectObjects(objectsToTest)
-
+    
     
    
     // for(const thing of objectsToTest){
     //     thing.material.color.set('#ffffff')
     // }
+
     // for(const intersect of intersects){
     //     intersect.object.material.color.set('#00ff00')
     // }
+    
 
     if(intersects.length){
             
         if(currentIntersects === null){
-            console.log('in');
-            postcardDurhamMesh.material.map= durhamPostcardColor
-            postcardRichmondMesh.material.map= richmondPostcardColor
-            postcardTulsaMesh.material.map= tulsaPostcardColor
+            console.log('in')
+            console.log(intersects)
+            
+
+            if(intersects[0].object.name === 'durhamPostcard') {
+                postcardDurhamMesh.material.map= durhamPostcardColor
+            }
+            if(intersects[0]===postcardRichmondMesh) {
+                postcardRichmondMesh.material.map= richmondPostcardColor
+            }
+            if(intersects[0]===postcardTulsaMesh) {
+                postcardTulsaMesh.material.map= tulsaPostcardColor
+            }
+            
+           
         }
         currentIntersects = intersects[0]
        //console.log(intersects.object);
