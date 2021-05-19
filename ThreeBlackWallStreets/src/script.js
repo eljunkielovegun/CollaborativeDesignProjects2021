@@ -133,6 +133,9 @@ const postcardRichmondMaterial = new THREE.MeshStandardMaterial({
 })
 const postcardRichmondMesh = new THREE.Mesh( postcardGeometry, postcardRichmondMaterial )
 
+postcardTulsaMesh.position.x = -7
+postcardRichmondMesh.position.x = 7
+
 scene.add(postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
 
 
@@ -324,12 +327,7 @@ const tick = () =>
     const objectsToTest = [ postcardDurhamMesh, postcardRichmondMesh, postcardTulsaMesh ]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
-    // pin.rotation.y +=  0.001
-    // console.log(pin.rotation.y)
-
-    // if(intersects){
-    //     console.log(intersects);
-    // }
+    
    
     // for(const thing of objectsToTest){
     //     thing.material.color.set('#ffffff')
@@ -339,9 +337,7 @@ const tick = () =>
     // }
 
     if(intersects.length){
-        postcardDurhamMesh.material.map= durhamPostcardBW
-            postcardRichmondMesh.material.map= richmondPostcardBW
-            postcardTulsaMesh.material.map= tulsaPostcardBW
+            
         if(currentIntersects === null){
             console.log('in');
             postcardDurhamMesh.material.map= durhamPostcardColor
