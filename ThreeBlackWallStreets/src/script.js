@@ -118,19 +118,14 @@ scene.add(overlay)
 
 const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
 
-const postcardDurhamBWMaterial = new THREE.MeshStandardMaterial({ 
+const postcardDurhamMaterial = new THREE.MeshStandardMaterial({ 
     
     map: durhamPostcardBW
     
 })
-const postcardDurhamColorMaterial = new THREE.MeshStandardMaterial({ 
-    side: THREE.DoubleSide,
-    map: durhamPostcardColor
-    
-})
 
 
-const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamColorMaterial )
+const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamMaterial )
 
 
 
@@ -346,14 +341,14 @@ const tick = () =>
     if(intersects.length){
         if(currentIntersects === null){
             console.log('in');
-            postcardDurhamMesh.material= postcardDurhamBWMaterial
+            postcardDurhamMesh.material.map= durhamPostcardColor
         }
         currentIntersects = intersects[0]
        //console.log(intersects.object);
     } else {
         if(currentIntersects){
             console.log('out');
-            postcardDurhamMesh.material= postcardDurhamColorMaterial
+            postcardDurhamMesh.material.map= durhamPostcardBW
         }
         currentIntersects = null
     }
