@@ -1,1 +1,0 @@
-Code for the Thre Black Wallstreets. A collaboration between artist Paul Rucker and the GWU Interaction Design Program led by Kevin Patton

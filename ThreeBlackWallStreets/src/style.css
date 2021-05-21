@@ -46,5 +46,8 @@ body
     font-size: 350%;
     font-stretch: expanded;
     text-align: center;
-    top: 10%;
+    position: relative;
+    margin-top: 5%;
+    letter-spacing: 5px;
+
 }
