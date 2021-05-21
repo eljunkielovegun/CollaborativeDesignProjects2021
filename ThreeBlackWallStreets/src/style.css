@@ -16,6 +16,7 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
 }
 
 .loading-bar
@@ -35,4 +36,15 @@ body
     transform: scaleX(0);
     transform-origin: 100% 0;
     transition: transform 1.5s ease-in-out;
+}
+
+.titleText
+{
+    font-family: roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 350%;
+    font-stretch: expanded;
+    text-align: center;
+    top: 10%;
 }

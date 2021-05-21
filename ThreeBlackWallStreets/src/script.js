@@ -56,6 +56,11 @@ const loadingManager = new THREE.LoadingManager(
 // const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const textureLoader = new THREE.TextureLoader(loadingManager)
+const fontLoader = new THREE.FontLoader(loadingManager);
+
+//loading fonts
+// const roboto = fontLoader.load('/fonts/Roboto/Light_Regular.json')
+
 
 // loading textures:
 
@@ -121,6 +126,31 @@ const overlayMaterial = new THREE.ShaderMaterial({
 const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
 scene.add(overlay)
 
+/**
+ * Text
+ */
+// fontLoader.load(
+//     '/fonts/Roboto/Light_Regular.json',
+//     (font) =>
+//     {
+//         const titleTextGeometry = new THREE.TextGeometry(
+//             'THREE BLACK WALLSTREETS',
+//             {
+//                 font: font,
+//                 size: 0.5,
+//                 height: 0.2,
+//                 curveSegments: 6,
+//                 depth: 0.0
+                
+//             }
+//         )
+//         const titleTextMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 })
+//         titleTextGeometry.center()
+//         const titleText = new THREE.Mesh(titleTextGeometry, titleTextMaterial)
+//         titleText.position.y = 3
+//         scene.add(titleText)
+//     }
+// )
 /**
  * City postcards
  */
@@ -256,6 +286,8 @@ const sizes = {
     height: window.innerHeight
 }
 
+console.log(sizes.height)
+
 const raycaster = new THREE.Raycaster()
 
 window.addEventListener('resize', () =>
@@ -278,7 +310,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(0, 0, 6)
+camera.position.set(0, 0, 5)
 scene.add(camera)
 
 /**
@@ -304,8 +336,15 @@ window.addEventListener('click', () => {
             
         } else if (currentIntersects.object === postcardRichmondMesh.children[0]){
             gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: -Math.PI})
-        } else if (currentIntersects.object === null){
-
+        } else if (currentIntersects.object === postcardDurhamMesh.children[1]){
+           
+            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+           
+        } else if (currentIntersects.object === postcardTulsaMesh.children[1]) {   
+            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+            
+        } else if (currentIntersects.object === postcardRichmondMesh.children[1]){
+            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
         }
 
     } else {
@@ -366,7 +405,7 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
 
-    const objectsToTest = [ placeholder, postcardDurhamMesh.children[0], postcardRichmondMesh.children[0], postcardTulsaMesh.children[0] ]
+    const objectsToTest = [ placeholder, postcardDurhamMesh.children[0],postcardDurhamMesh.children[1], postcardRichmondMesh.children[0] , postcardRichmondMesh.children[1], postcardTulsaMesh.children[0], postcardTulsaMesh.children[1] ]
     const intersects = raycaster.intersectObjects(objectsToTest)
     
     
@@ -409,6 +448,7 @@ const tick = () =>
            
         }
         currentIntersects = intersects[0]
+        
        //console.log(intersects.object);
     } else {
         if(currentIntersects){
