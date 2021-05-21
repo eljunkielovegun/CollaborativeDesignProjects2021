@@ -4,6 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
 import * as dat from 'dat.gui'
+import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js'
+
+
 
 const params = {
     exposure: 1.0,
@@ -39,7 +42,7 @@ const loadingManager = new THREE.LoadingManager(
             loadingBarElement.classList.add('ended')
             loadingBarElement.style.transform = ''
         }, 500)
-        console.log(durhamPostcardBW)
+        
     },
 
     // Progress
@@ -63,11 +66,17 @@ const durhamPostcardBW = textureLoader.load('/postcardBW/durham.png')
 const richmondPostcardBW = textureLoader.load('/postcardBW/richmond.png')
 const tulsaPostcardBW = textureLoader.load('/postcardBW/tulsa.png')
 /**
- * postcard bw
+ * postcard color
  */
 const durhamPostcardColor = textureLoader.load('/postcardColor/durham.jpg')
 const richmondPostcardColor = textureLoader.load('/postcardColor/richmond.jpg')
 const tulsaPostcardColor = textureLoader.load('/postcardColor/tulsa.jpg')
+/**
+ * postcard Back
+ */
+const durhamPostcardBack = textureLoader.load('/postcardBack/durham.jpg')
+const richmondPostcardBack = textureLoader.load('/postcardBack/richmond.jpg')
+const tulsaPostcardBack = textureLoader.load('/postcardBack/tulsa.jpg')
 
 
 
@@ -118,23 +127,50 @@ scene.add(overlay)
 
 const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
 
-const postcardDurhamMaterial = new THREE.MeshStandardMaterial({ 
-    map: durhamPostcardBW
+const postcardDurhamMaterialFront = new THREE.MeshStandardMaterial({ 
+    map: durhamPostcardBW,
+    side: THREE.FrontSide
+    
 })
-const postcardDurhamMesh = new THREE.Mesh( postcardGeometry, postcardDurhamMaterial )
-postcardDurhamMesh.name = 'durhamPostcard'
+const postcardDurhamMaterialBack = new THREE.MeshStandardMaterial({ 
+    map: durhamPostcardBack,
+    side: THREE.BackSide
+})
 
-const postcardTulsaMaterial = new THREE.MeshStandardMaterial({ 
-    map: tulsaPostcardBW
-})
-const postcardTulsaMesh = new THREE.Mesh( postcardGeometry, postcardTulsaMaterial )
-postcardTulsaMesh.name = 'tulsaPostcard'
+const postcardDurhamMaterial = [ postcardDurhamMaterialFront, postcardDurhamMaterialBack ]
+var postcardDurhamMesh = new SceneUtils.createMultiMaterialObject( postcardGeometry, postcardDurhamMaterial );
 
-const postcardRichmondMaterial = new THREE.MeshStandardMaterial({ 
-    map: richmondPostcardBW
+postcardDurhamMesh.children[0].name = 'durhamPostcard'
+
+
+const postcardTulsaMaterialFront = new THREE.MeshStandardMaterial({ 
+    map: tulsaPostcardBW,
+    side: THREE.FrontSide
 })
-const postcardRichmondMesh = new THREE.Mesh( postcardGeometry, postcardRichmondMaterial )
-postcardRichmondMesh.name = 'richmondPostcard'
+const postcardTulsaMaterialBack = new THREE.MeshStandardMaterial({ 
+    map: tulsaPostcardBack,
+    side: THREE.BackSide
+})
+
+const postcardTulsaMaterial = [ postcardTulsaMaterialFront, postcardTulsaMaterialBack ]
+var postcardTulsaMesh = new SceneUtils.createMultiMaterialObject( postcardGeometry, postcardTulsaMaterial );
+
+postcardTulsaMesh.children[0].name = 'tulsaPostcard'
+
+
+const postcardRichmondMaterialFront = new THREE.MeshStandardMaterial({ 
+    map: richmondPostcardBW,
+    side: THREE.FrontSide
+})
+
+const postcardRichmondMaterialBack = new THREE.MeshStandardMaterial({ 
+    map: richmondPostcardBack,
+    side: THREE.BackSide
+})
+
+const postcardRichmondMaterial = [ postcardRichmondMaterialFront, postcardRichmondMaterialBack ]
+const postcardRichmondMesh = new SceneUtils.createMultiMaterialObject( postcardGeometry, postcardRichmondMaterial );
+postcardRichmondMesh.children[0].name = 'richmondPostcard'
 
 postcardTulsaMesh.position.x = -7
 postcardRichmondMesh.position.x = 7
@@ -142,7 +178,8 @@ postcardRichmondMesh.position.x = 7
 scene.add(postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
 
 
-scene.background = new THREE.Color( 0x404040 )
+
+scene.background = new THREE.Color( 0xffffff )
 /**
  * 
  * Update all materials
@@ -207,8 +244,8 @@ directionalLight.shadow.normalBias = 0.05
 directionalLight.position.set(0.25, 3, - 2.25)
 scene.add(directionalLight)
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.0)
-// gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001)
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
+ gui.add(ambientLight, 'intensity').min(0).max(5).step(0.001)
 scene.add(ambientLight)
 
 /**
@@ -258,14 +295,15 @@ window.addEventListener('click', () => {
   
     if(currentIntersects){
        // console.log(currentIntersects);
-        if(currentIntersects.object === null){
-            
+        if(currentIntersects.object === postcardDurhamMesh.children[0]){
            
-        } else if (currentIntersects.object === null) {   
-            // gsap.to(camera.position, { duration: 1, x: 0, y:1.85, z:0})
+            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: -Math.PI})
+           
+        } else if (currentIntersects.object === postcardTulsaMesh.children[0]) {   
+            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: -Math.PI})
             
-        } else if (currentIntersects.object === null){
-            
+        } else if (currentIntersects.object === postcardRichmondMesh.children[0]){
+            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: -Math.PI})
         } else if (currentIntersects.object === null){
 
         }
@@ -328,7 +366,7 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
 
-    const objectsToTest = [ placeholder, postcardDurhamMesh, postcardRichmondMesh, postcardTulsaMesh ]
+    const objectsToTest = [ placeholder, postcardDurhamMesh.children[0], postcardRichmondMesh.children[0], postcardTulsaMesh.children[0] ]
     const intersects = raycaster.intersectObjects(objectsToTest)
     
     
@@ -346,17 +384,26 @@ const tick = () =>
             
         if(currentIntersects === null){
             console.log('in')
-            console.log(intersects)
+            
             
 
             if(intersects[0].object.name === 'durhamPostcard') {
-                postcardDurhamMesh.material.map= durhamPostcardColor
+                postcardDurhamMesh.children[0].material.map = durhamPostcardColor
+                gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+                gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
+              
+            } 
+           
+            if(intersects[0].object.name === 'richmondPostcard') {
+                postcardRichmondMesh.children[0].material.map= richmondPostcardColor
+                gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+                gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+                console.log(intersects[0])
             }
-            if(intersects[0]===postcardRichmondMesh) {
-                postcardRichmondMesh.material.map= richmondPostcardColor
-            }
-            if(intersects[0]===postcardTulsaMesh) {
-                postcardTulsaMesh.material.map= tulsaPostcardColor
+            if(intersects[0].object.name === 'tulsaPostcard') {
+                postcardTulsaMesh.children[0].material.map= tulsaPostcardColor
+                gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+                gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
             }
             
            
@@ -366,9 +413,10 @@ const tick = () =>
     } else {
         if(currentIntersects){
             console.log('out');
-            postcardDurhamMesh.material.map= durhamPostcardBW
-            postcardRichmondMesh.material.map= richmondPostcardBW
-            postcardTulsaMesh.material.map= tulsaPostcardBW
+            postcardDurhamMesh.children[0].material.map = durhamPostcardBW
+            
+            postcardRichmondMesh.children[0].material.map= richmondPostcardBW
+            postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
         }
         currentIntersects = null
     }
