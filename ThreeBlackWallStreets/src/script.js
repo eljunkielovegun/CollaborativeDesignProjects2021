@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
 import * as dat from 'dat.gui'
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js'
-import { Texture } from 'three'
+import { AdditiveBlending, Texture } from 'three'
 
 
 
@@ -83,6 +83,13 @@ const tulsaPostcardColor = textureLoader.load('/postcardColor/tulsa.jpg')
 const durhamPostcardBack = textureLoader.load('/postcardBack/durham.jpg')
 const richmondPostcardBack = textureLoader.load('/postcardBack/richmond.jpg')
 const tulsaPostcardBack = textureLoader.load('/postcardBack/tulsa.jpg')
+/**
+ * other postcard back
+ */
+const postcard1 = textureLoader.load('/postcardBack/1.jpg')
+const postcard2 = textureLoader.load('/postcardBack/2.jpg')
+const postcard3 = textureLoader.load('/postcardBack/3.jpg')
+const postcard4 = textureLoader.load('/postcardBack/4.jpg')
 
 /**
  * paper texture
@@ -135,31 +142,7 @@ const overlayMaterial = new THREE.ShaderMaterial({
 const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
 scene.add(overlay)
 
-/**
- * Text
- */
-// fontLoader.load(
-//     '/fonts/Roboto/Light_Regular.json',
-//     (font) =>
-//     {
-//         const titleTextGeometry = new THREE.TextGeometry(
-//             'THREE BLACK WALLSTREETS',
-//             {
-//                 font: font,
-//                 size: 0.5,
-//                 height: 0.2,
-//                 curveSegments: 6,
-//                 depth: 0.0
-                
-//             }
-//         )
-//         const titleTextMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 })
-//         titleTextGeometry.center()
-//         const titleText = new THREE.Mesh(titleTextGeometry, titleTextMaterial)
-//         titleText.position.y = 3
-//         scene.add(titleText)
-//     }
-// )
+
 /**
  * City postcards
  */
@@ -167,8 +150,10 @@ scene.add(overlay)
 const postcardGeometry = new THREE.PlaneBufferGeometry(5,3.5,1,1)
 
 const postcardDurhamMaterialFront = new THREE.MeshStandardMaterial({ 
+    color: new THREE.Color("hsl(2, 100%, 90%)"),
     map: durhamPostcardBW,
     side: THREE.FrontSide
+   
     
 })
 const postcardDurhamMaterialBack = new THREE.MeshStandardMaterial({ 
@@ -183,10 +168,14 @@ postcardDurhamMesh.children[0].name = 'durhamPostcard'
 
 
 const postcardTulsaMaterialFront = new THREE.MeshStandardMaterial({ 
+    color: new THREE.Color("hsl(2, 100%, 90%)"),
     map: tulsaPostcardBW,
     side: THREE.FrontSide
+   
+    
 })
 const postcardTulsaMaterialBack = new THREE.MeshStandardMaterial({ 
+    
     map: tulsaPostcardBack,
     side: THREE.BackSide
 })
@@ -198,6 +187,7 @@ postcardTulsaMesh.children[0].name = 'tulsaPostcard'
 
 
 const postcardRichmondMaterialFront = new THREE.MeshStandardMaterial({ 
+    color: new THREE.Color("hsl(2, 100%, 90%)"),
     map: richmondPostcardBW,
     side: THREE.FrontSide
 })
@@ -219,6 +209,27 @@ postcardRichmondMesh.castShadow = true
 postcardDurhamMesh.castShadow = true
 
 scene.add( postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
+
+/**
+ * other postcard meshes
+ */
+
+ const postcard1Material = new THREE.MeshStandardMaterial({ map: postcard1 })
+ const postcard2Material = new THREE.MeshStandardMaterial({ map: postcard2 })
+ const postcard3Material = new THREE.MeshStandardMaterial({ map: postcard3 })
+ const postcard4Material = new THREE.MeshStandardMaterial({ map: postcard4 })
+
+ const postcard1mesh = new THREE.Mesh( postcardGeometry, postcard1Material )
+ const postcard2mesh = new THREE.Mesh( postcardGeometry, postcard2Material )
+ const postcard3mesh = new THREE.Mesh( postcardGeometry, postcard3Material )
+ const postcard4mesh = new THREE.Mesh( postcardGeometry, postcard4Material )
+
+ postcard1mesh.position.set(-2, -2, -0.1 )
+ postcard2mesh.position.set(2, -2, -0.05 )
+ postcard3mesh.position.set(0, -2, -0.08 )
+ postcard4mesh.position.set(1, -2, -0.03 )
+
+ scene.add( postcard1mesh, postcard2mesh, postcard3mesh, postcard4mesh )
 
 // const backgroundMaterial = new THREE.MeshStandardMaterial({
 //     map: paperColor,
@@ -297,7 +308,7 @@ console.log(scene.background)
 // directionalLight.position.set(0.25, 3, 4)
 // scene.add(directionalLight)
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
  gui.add(ambientLight, 'intensity').min(0).max(5).step(0.001)
 scene.add(ambientLight)
 
@@ -393,8 +404,8 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.physicallyCorrectLights = true
 renderer.outputEncoding = THREE.sRGBEncoding
-renderer.toneMapping = THREE.CineonToneMapping
-renderer.toneMappingExposure = 1.3
+renderer.toneMapping = THREE.ACESFilmicToneMapping
+renderer.toneMappingExposure = 0.88
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
@@ -405,19 +416,38 @@ renderer.shadowMapSoft = true;
 let currentIntersects = null
 let placeholder = new THREE.Object3D // this is a hack so that the default of the raycaster doesnt start trigered
 
-// gui.add( params, 'toneMapping', Object.keys( toneMappingOptions )).onChange( function () {
+gui.add( params, 'toneMapping', Object.keys( toneMappingOptions )).onChange( function () {
 
-//                 updateGUI();
+                updateGUI();
 
-//                 renderer.toneMapping = toneMappingOptions[ params.toneMapping ];
-//                 postcardDurhamMesh.material.needsUpdate = true;
-//                 renderer.render(scene, camera);
+                renderer.toneMapping = toneMappingOptions[ params.toneMapping ];
+                postcardDurhamMesh.children[0].material.needsUpdate = true;
+            
+                postcardRichmondMesh.children[0].material.needsUpdate = true;
+                postcardTulsaMesh.children[0].material.needsUpdate = true;
+                
+                
+                renderer.render(scene, camera);
 
-//             } );
+            } );
 
-//             updateGUI();
+            updateGUI();
 
-//             gui.open();
+            gui.open();
+function updateGUI() {
+
+    if ( guiExposure !== null ) {
+        gui.remove( guiExposure );
+        guiExposure = null;
+    }
+    if ( params.toneMapping !== 'None' ) {
+        guiExposure = gui.add( params, 'exposure', 0, 2 ).onChange( function () {
+                renderer.toneMappingExposure = params.exposure;
+                renderer.render(scene, camera)
+
+            } );
+    }
+}
 
 /**
  * Animate
@@ -493,19 +523,6 @@ const tick = () =>
     window.requestAnimationFrame(tick)
 }
 
-// function updateGUI() {
 
-//     if ( guiExposure !== null ) {
-//         gui.remove( guiExposure );
-//         guiExposure = null;
-//     }
-//     if ( params.toneMapping !== 'None' ) {
-//         guiExposure = gui.add( params, 'exposure', 0, 2 ).onChange( function () {
-//                 renderer.toneMappingExposure = params.exposure;
-//                 renderer.render(scene, camera)
-
-//             } );
-//     }
-// }
 
 tick()
