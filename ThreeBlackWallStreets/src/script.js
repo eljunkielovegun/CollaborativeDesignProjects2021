@@ -7,7 +7,15 @@ import * as dat from 'dat.gui'
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js'
 import { AdditiveBlending, Texture } from 'three'
 
+/**
+ * get dom
+ */
 
+const titleText = document.getElementsByClassName("titleText")[0]
+ const paulText = document.getElementsByClassName("paulText")[0]
+//  console.log(titleText[0])
+
+ 
 
 const params = {
     exposure: 1.0,
@@ -364,15 +372,26 @@ window.addEventListener('click', () => {
         if(currentIntersects.object === postcardDurhamMesh.children[0]){
            
             gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: -Math.PI})
+            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 2.5})
+            titleText.style.visibility = "hidden"
+            paulText.style.visibility = "hidden"
+            
            
         } else if (currentIntersects.object === postcardTulsaMesh.children[0]) {   
             gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: -Math.PI})
             
         } else if (currentIntersects.object === postcardRichmondMesh.children[0]){
             gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: -Math.PI})
+            //BACK SIDE ****************
         } else if (currentIntersects.object === postcardDurhamMesh.children[1]){
            
             gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 6})
+            window.setTimeout(() =>
+        {
+            titleText.style.visibility = "visible"
+            paulText.style.visibility = "visible"
+        }, 1000)
            
         } else if (currentIntersects.object === postcardTulsaMesh.children[1]) {   
             gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
@@ -455,7 +474,7 @@ function updateGUI() {
 const tick = () =>
 {
     // Update controls
-    controls.update()
+  //  controls.update()
 
     raycaster.setFromCamera(mouse, camera)
 
@@ -463,31 +482,18 @@ const tick = () =>
     const objectsToTest = [ placeholder, postcardDurhamMesh.children[0],postcardDurhamMesh.children[1], postcardRichmondMesh.children[0] , postcardRichmondMesh.children[1], postcardTulsaMesh.children[0], postcardTulsaMesh.children[1] ]
     const intersects = raycaster.intersectObjects(objectsToTest)
     
-    
-   
-    // for(const thing of objectsToTest){
-    //     thing.material.color.set('#ffffff')
-    // }
-
-    // for(const intersect of intersects){
-    //     intersect.object.material.color.set('#00ff00')
-    // }
-    
 
     if(intersects.length){
             
         if(currentIntersects === null){
             console.log('in')
             
-            
-
             if(intersects[0].object.name === 'durhamPostcard') {
                 postcardDurhamMesh.children[0].material.map = durhamPostcardColor
                 gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
                 gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
               
             } 
-           
             if(intersects[0].object.name === 'richmondPostcard') {
                 postcardRichmondMesh.children[0].material.map= richmondPostcardColor
                 gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
@@ -500,16 +506,12 @@ const tick = () =>
                 gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
             }
             
-           
         }
         currentIntersects = intersects[0]
-        
-       //console.log(intersects.object);
     } else {
         if(currentIntersects){
             console.log('out');
             postcardDurhamMesh.children[0].material.map = durhamPostcardBW
-            
             postcardRichmondMesh.children[0].material.map= richmondPostcardBW
             postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
         }
