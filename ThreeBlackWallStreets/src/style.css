@@ -47,7 +47,18 @@ body
     font-stretch: expanded;
     text-align: center;
     position: relative;
-    margin-top: 5%;
+    margin-top: 3%;
     letter-spacing: 5px;
+
+}
+.paulText
+{
+    /* font-family: six-hands-chalk, sans-serif; */
+    font-family: allura, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 300%;
+    text-align: center;
+    position: relative;
 
 }

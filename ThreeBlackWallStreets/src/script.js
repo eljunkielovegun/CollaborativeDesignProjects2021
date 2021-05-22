@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
 import * as dat from 'dat.gui'
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js'
+import { Texture } from 'three'
 
 
 
@@ -56,7 +57,7 @@ const loadingManager = new THREE.LoadingManager(
 // const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const textureLoader = new THREE.TextureLoader(loadingManager)
-const fontLoader = new THREE.FontLoader(loadingManager);
+// const fontLoader = new THREE.FontLoader(loadingManager);
 
 //loading fonts
 // const roboto = fontLoader.load('/fonts/Roboto/Light_Regular.json')
@@ -83,6 +84,14 @@ const durhamPostcardBack = textureLoader.load('/postcardBack/durham.jpg')
 const richmondPostcardBack = textureLoader.load('/postcardBack/richmond.jpg')
 const tulsaPostcardBack = textureLoader.load('/postcardBack/tulsa.jpg')
 
+/**
+ * paper texture
+ */
+const paperColor = textureLoader.load('/textures/paper/linen.jpeg')
+// const paperDisplacement = textureLoader.load('/textures/paper/DISP.jpg')
+// const paperNorm = textureLoader.load('/textures/paper/NORM.jpg')
+// const paperOcc = textureLoader.load('/textures/paper/OCC.jpg')
+// const paperRough = textureLoader.load('/textures/paper/ROUGH.jpg')
 
 
 /**
@@ -205,11 +214,25 @@ postcardRichmondMesh.children[0].name = 'richmondPostcard'
 postcardTulsaMesh.position.x = -7
 postcardRichmondMesh.position.x = 7
 
-scene.add(postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
+postcardTulsaMesh.castShadow =  true
+postcardRichmondMesh.castShadow = true
+postcardDurhamMesh.castShadow = true
 
+scene.add( postcardDurhamMesh, postcardTulsaMesh, postcardRichmondMesh )
 
+// const backgroundMaterial = new THREE.MeshStandardMaterial({
+//     map: paperColor,
+//     displacementMap: paperDisplacement,
+//     normalMap: paperNorm,
+//     aoMap:   paperOcc,
+//     roughnessMap: paperRough
 
-scene.background = new THREE.Color( 0xffffff )
+// })
+
+scene.background = paperColor
+scene.receiveShadow = true
+
+console.log(scene.background)
 /**
  * 
  * Update all materials
@@ -266,13 +289,13 @@ scene.background = new THREE.Color( 0xffffff )
 /**
  * Lights
  */
-const directionalLight = new THREE.DirectionalLight('#ffffff', 3)
-directionalLight.castShadow = true
-directionalLight.shadow.camera.far = 15
-directionalLight.shadow.mapSize.set(1024, 1024)
-directionalLight.shadow.normalBias = 0.05
-directionalLight.position.set(0.25, 3, - 2.25)
-scene.add(directionalLight)
+// const directionalLight = new THREE.DirectionalLight('#f0f0f0', 1)
+// directionalLight.castShadow = true
+// directionalLight.shadow.camera.far = 15
+// directionalLight.shadow.mapSize.set(1024, 1024)
+// directionalLight.shadow.normalBias = 0.05
+// directionalLight.position.set(0.25, 3, 4)
+// scene.add(directionalLight)
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
  gui.add(ambientLight, 'intensity').min(0).max(5).step(0.001)
@@ -370,12 +393,14 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.physicallyCorrectLights = true
 renderer.outputEncoding = THREE.sRGBEncoding
-renderer.toneMapping = THREE.LinearToneMapping
+renderer.toneMapping = THREE.CineonToneMapping
 renderer.toneMappingExposure = 1.3
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMapSoft = true;
+
 
 let currentIntersects = null
 let placeholder = new THREE.Object3D // this is a hack so that the default of the raycaster doesnt start trigered
