@@ -329,9 +329,9 @@ postcardTulsaMesh.children[1].castShadow =  true
 postcardRichmondMesh.children[1].castShadow = true
 postcardDurhamMesh.children[1].castShadow = true
 
-postcardTulsaMesh.children[0].receiveShadow =  true
-postcardRichmondMesh.children[0].receiveShadow = true
-postcardDurhamMesh.children[0].receiveShadow = true
+// postcardTulsaMesh.children[0].receiveShadow =  true
+// postcardRichmondMesh.children[0].receiveShadow = true
+// postcardDurhamMesh.children[0].receiveShadow = true
 
 postcard1mesh.receiveShadow =  true
 postcard2mesh.receiveShadow =  true
@@ -478,22 +478,35 @@ window.addEventListener('click', () => {
        // console.log(currentIntersects);
         if(currentIntersects.object === postcardDurhamMesh.children[0]){
            
-            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: -Math.PI})
-            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 2.5})
+            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: -Math.PI, z: 0})
+            gsap.to(camera.position, { duration: 1, x: 3.542, y: 0.182, z: 1.8})
             titleText.style.visibility = "hidden"
             paulText.style.visibility = "hidden"
             
+
+
+            
            
         } else if (currentIntersects.object === postcardTulsaMesh.children[0]) {   
-            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: -Math.PI})
+            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: -Math.PI, z: 0})
+            gsap.to(postcardTulsaMesh.position, { duration: 1, z: 0.1})
+             gsap.to(camera.position, { duration: 1, x: 0, y: -1.01, z: 1.8})
+            titleText.style.visibility = "hidden"
+            paulText.style.visibility = "hidden"
+            
             
         } else if (currentIntersects.object === postcardRichmondMesh.children[0]){
-            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: -Math.PI})
+            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: -Math.PI, z: 0})
+            gsap.to(postcardRichmondMesh.position, { duration: 1, z: 0.1})
+            gsap.to(camera.position, { duration: 1, x: -2.96, y: 0.29, z: 1.7})
+            titleText.style.visibility = "hidden"
+            paulText.style.visibility = "hidden"
+
             //BACK SIDE ****************
         } else if (currentIntersects.object === postcardDurhamMesh.children[1]){
            
-            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
-            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 6})
+            gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0, z:-0.035})
+            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 3.867})
             window.setTimeout(() =>
                 {
                     titleText.style.visibility = "visible"
@@ -501,10 +514,26 @@ window.addEventListener('click', () => {
                 }, 1000)
            
         } else if (currentIntersects.object === postcardTulsaMesh.children[1]) {   
-            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+            gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0, z: 0.182 })
+            gsap.to(postcardTulsaMesh.position, { duration: 1, z: 0})
+            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 3.867})
+
+            window.setTimeout(() =>
+                {
+                    titleText.style.visibility = "visible"
+                    paulText.style.visibility = "visible"
+                }, 1000)
             
         } else if (currentIntersects.object === postcardRichmondMesh.children[1]){
-            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
+            gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0, z: 0.399})
+            gsap.to(postcardRichmondMesh.position, { duration: 1, z: -0.01})
+            gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 3.867})
+
+            window.setTimeout(() =>
+                {
+                    titleText.style.visibility = "visible"
+                    paulText.style.visibility = "visible"
+                }, 1000)
         }
 
     } else {
@@ -561,31 +590,31 @@ const tick = () =>
     if(intersects.length){
             
         if(currentIntersects === null){
-            // console.log('in')
+            console.log('in')
             
             if(intersects[0].object.name === 'durhamPostcard') {
                 postcardDurhamMesh.children[0].material.map = durhamPostcardColor
-                gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
-                gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
               
             } 
             if(intersects[0].object.name === 'richmondPostcard') {
                 postcardRichmondMesh.children[0].material.map= richmondPostcardColor
-                gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
-                gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
                 // console.log(intersects[0])
             }
             if(intersects[0].object.name === 'tulsaPostcard') {
                 postcardTulsaMesh.children[0].material.map= tulsaPostcardColor
-                gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
-                gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
+                // gsap.to(postcardRichmondMesh.rotation, { duration: 1, y: 0})
             }
             
         }
         currentIntersects = intersects[0]
     } else {
         if(currentIntersects){
-            // console.log('out');
+            console.log('out');
             postcardDurhamMesh.children[0].material.map = durhamPostcardBW
             postcardRichmondMesh.children[0].material.map= richmondPostcardBW
             postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
