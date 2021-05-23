@@ -15,6 +15,24 @@ const titleText = document.getElementsByClassName("titleText")[0]
  const paulText = document.getElementsByClassName("paulText")[0]
 //  console.log(titleText[0])
 
+const menu = document.querySelector('#nav-icon')
+const aboutDiv = document.querySelector('.aboutDiv')
+
+// console.log(menu.classList)
+menu.onclick = () => {
+    menu.classList.toggle('open')
+    aboutDiv.classList.toggle('open')
+//put the stuff here!
+    
+}
+
+// window.addEventListener('click', () => {
+//     .classlist.toggle('.open')
+//     // 
+// })
+
+
+
  
 
 const params = {
@@ -388,10 +406,10 @@ window.addEventListener('click', () => {
             gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
             gsap.to(camera.position, { duration: 1, x: 0, y: 0, z: 6})
             window.setTimeout(() =>
-        {
-            titleText.style.visibility = "visible"
-            paulText.style.visibility = "visible"
-        }, 1000)
+                {
+                    titleText.style.visibility = "visible"
+                    paulText.style.visibility = "visible"
+                }, 1000)
            
         } else if (currentIntersects.object === postcardTulsaMesh.children[1]) {   
             gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
@@ -486,7 +504,7 @@ const tick = () =>
     if(intersects.length){
             
         if(currentIntersects === null){
-            console.log('in')
+            // console.log('in')
             
             if(intersects[0].object.name === 'durhamPostcard') {
                 postcardDurhamMesh.children[0].material.map = durhamPostcardColor
@@ -498,7 +516,7 @@ const tick = () =>
                 postcardRichmondMesh.children[0].material.map= richmondPostcardColor
                 gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
                 gsap.to(postcardTulsaMesh.rotation, { duration: 1, y: 0})
-                console.log(intersects[0])
+                // console.log(intersects[0])
             }
             if(intersects[0].object.name === 'tulsaPostcard') {
                 postcardTulsaMesh.children[0].material.map= tulsaPostcardColor
@@ -510,7 +528,7 @@ const tick = () =>
         currentIntersects = intersects[0]
     } else {
         if(currentIntersects){
-            console.log('out');
+            // console.log('out');
             postcardDurhamMesh.children[0].material.map = durhamPostcardBW
             postcardRichmondMesh.children[0].material.map= richmondPostcardBW
             postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
