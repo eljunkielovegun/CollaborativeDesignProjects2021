@@ -133,7 +133,7 @@ body
     right: 0;
     top: 0;
     float: right;
-    margin-right: -100%;
+    /* margin-right: -100%; */
     padding-top: 30px; 
     padding-left: 50px; 
     padding-bottom: 20px; 
@@ -141,20 +141,21 @@ body
     font-size: 12px;
     color: black;
     /* z-index: 2; */
-    -webkit-transition: .4s ;
-    -moz-transition: .4s ;
-    -o-transition: .4s ;
-    transition: .4s ;
-    /* transform: skewY(-15deg); */
+    -webkit-transition: .4s ease-in-out;
+    -moz-transition: .4s ease-in-out;
+    -o-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+    transform: translate(100%, 0%);
     overflow-y: auto;
     background: #ffffff;
 }
 
 .aboutDiv.open
 {
-    /* display: hidden; */
+    
     visibility: visible;
-    margin-right: 0px;
+    transform: translate(0%, 0%);
+
 }
 
 
@@ -262,4 +263,104 @@ body
   left: calc(50% - 5px);
   top: 22px;
 }
+
+.storyDiv
+{
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 350%;
+  /* display: hidden; */
+  /* visibility: hidden; */
+  position: absolute;
+  font-family: sans-serif;
+  /* margin-top: 10%; */
+  width: 40%;
+  height: 100%;
+  opacity: 1;
+  right: 0%;
+  top: 70%;
+  float: right;
+  /* margin-right: -100%; */
+  padding-top: 1000px; 
+  padding-left: 500px; 
+  padding-bottom:0px; 
+  padding-right: 20px; 
+  font-size: 12px;
+  color: black;
+  /* z-index: 2; */
+  -webkit-transition: .4s ;
+  -moz-transition: .4s ;
+  -o-transition: .4s ;
+  transition: .4s ;
+  transform: skewY(-45deg);
+  overflow-y: auto;
+  background: #ffffff;
+  z-index: -1;
+}
+
+.storyContent
+{
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 100%;
+  position: absolute;
+  right: 0;
+  top: 54%;
+  padding-top: 0%;
+  padding-right: 20px;
+  padding-left: 75%;
+  float: right;
+  z-index: 1;
+  height: 375px;
+  overflow: auto;
+}
+
+.storyTitle
+{
+  position: absolute;
+  right: 0;
+  top: 47%;
+  left: 75%;
+  padding-right: 20px;
+  padding-left: 20px;
+  /* transform: skewY(40deg); */
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 100%;
+  text-align: center;
+  color: black;
+
+}
   
+.storyGraphOne
+{
+ padding-top: 30px;
+ 
+}
+
+.storyGraphTwo
+{
+  padding-top: 30px;
+}
+  
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; }
