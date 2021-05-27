@@ -266,6 +266,16 @@ body
 
 .storyDiv
 {
+  -webkit-transition: .4s ;
+  -moz-transition: .4s ;
+  -o-transition: .4s ;
+  transition: .4s ;
+  visibility: hidden;
+  /* display: none; */
+}
+
+.angledDiv
+{
   font-family: roboto, sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -297,6 +307,7 @@ body
   overflow-y: auto;
   background: #ffffff;
   z-index: -1;
+  
 }
 
 .storyContent
@@ -315,6 +326,7 @@ body
   z-index: 1;
   height: 375px;
   overflow: auto;
+  /* bottom: 5%; */
 }
 
 .storyTitle
@@ -338,6 +350,11 @@ body
 .storyGraphOne
 {
  padding-top: 30px;
+ padding-left: 30px;
+ -webkit-transition: .4s ;
+ -moz-transition: .4s ;
+ -o-transition: .4s ;
+ transition: .4s ;
  
 }
 
@@ -345,7 +362,154 @@ body
 {
   padding-top: 30px;
 }
+
+.imageDiv
+{
+  position: absolute;
+  right: 0;
+  bottom: 55%;
+  left: 75%;
+  height: 250;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.storyImageDiv
+{
+  position: absolute;
+  right: 25%;
+  bottom: 3.5%;
+  left: 55%;
+  height: 300px;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.arrows
+{
+  width: 200px;
+  height: 100px;
+  transform: scale(0.4, 0.4);
+  position: absolute;
+  white-space:nowrap;
+
+  left: 80%;
+  bottom: 5%;
+  z-index: 2;
+}
+
+.arrowUp{
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: inline-block;
+  position: relative;
+  /* left: 75%; */
+  text-align: left;
+  /* right: 8%; */
+  bottom:0;
+  background: transparent;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: thin;
+
+}
+
+.arrowUp:before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  border-style: solid;
+  border-color: #000;
+  border-width: 2px 2px 0 0;
+  position: absolute;
+  transform-origin: 50% 50%;
+
+  transform: rotate(-45deg); 
+    margin: -10px 0 0 -15px;
+}
+
+.arrowUp:after {
+  content: '';
+  display: block;
+  top: 50%;
+  left: 50%;
+  border-style: solid;
+  border-color: #000;
+  position: absolute;
+  transform-origin: 50% 50%;
+
+  width: 0;
+  height: 40px;
+  border-width: 0 2px 0 0;
+  transform: translate(0px, -10px);
+}
+    
+ 
+.arrowDown{
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  bottom:0;
+  display: inline-block;
+  position: relative;
   
+  text-align: right;
+  /* right: 5%; */
+ 
+  background: transparent;
+  border-radius: 50%;
+  border-style: solid;
+border-width: thin;
+ } 
+ .arrowDown:before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-color: #000;
+    border-width: 2px 2px 0 0;
+    position: absolute;
+    transform-origin: 50% 50%;
+
+    transform: rotate(135deg); 
+    margin: -20px 0 0 -15px;
+  } 
+
+.arrowDown:after {
+    content: '';
+    display: block;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-color: #000;
+    position: absolute;
+    transform-origin: 50% 50%;
+
+    width: 0;
+    height: 40px;
+    border-width: 0 2px 0 0;
+    transform: translate(0px, -30px);
+  }  
+
+
+.cityButton
+{
+  position: absolute;
+  top:0;
+  left: 5;
+  height:80px;
+  width: 110px;
+  text-align: center;
+  padding-top: 5px;
+  padding-left: 5px;
+}
 
 ::-webkit-scrollbar {
   width: 4px;
