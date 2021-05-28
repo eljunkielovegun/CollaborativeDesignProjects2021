@@ -9,13 +9,13 @@ import { AdditiveBlending, Texture } from 'three'
 
 
 /**
- * get dom/ html stuff for langing page **************************************************************
+ * get dom/ html stuff  **************************************************************
  */
 let tulsaExperience = false
 let durhamExperience = false
 let richmondExperience = false
 let landingPage = true
-let stats
+
 
 
 
@@ -37,6 +37,10 @@ const tulsaButton = document.getElementsByClassName('tulsaButton')[0]
 const durhamButton = document.getElementsByClassName('durhamButton')[0]
 const richmondButton = document.getElementsByClassName('richmondButton')[0]
 
+//buttonBack city
+
+const cityButton = document.querySelector('.cityButton')
+
 //get story div elements 
 const storyDiv = document.querySelector('.storyDiv')
 const storyTitle = document.querySelector('.storyTitle')
@@ -52,9 +56,6 @@ const arrowDown = document.getElementsByClassName('arrowDown')[0]
 
 
 
-//buttonBack city
-
-const cityButton = document.querySelector('.cityButton')
 
 
 const kpImage = document.createElement('img')
@@ -104,57 +105,84 @@ const richmondStoriesArray = [["bbrobinson", 3],["georgeobrownstudio", 2], ["hip
 const richmondStoriesTextArray = [["Born in Richmond, VA,  Bill Robinson, nicknamed Bojangles was an American tap dancer, actor, and singer who performed for audiences in the 1920s and '30s. He was the best known and the most highly paid Black American entertainer in America during the first half of the 20th century.", "Modern day monument for Bill 'Bojangles' Robinson, the pioneer tap dancer and occasional singer who performed for audiences in the 1920s and '30s.", "Bill Robinson, byname Bojangles, original name Luther Robinson, (born May 25, 1878, Richmond, Virginia, U.S.—died November 25, 1949, New York, New York). According to dance critic Marshall Stearns, 'Robinson's contribution to tap dance is exact and specific. He brought it up on its toes, dancing upright and swinging', adding a 'hitherto-unknown lightness and presence'"],["George O. Brown was born in 1852 in Orange County, Virginia to a family that was believed to be enslaved. Sometime after the Civil War, his family moved to Richmond and in 1872 got a job working at a photo studio.", "By 1899, he opened his own studio called Old Dominion Gallery. As his two children got older, they joined the family business and the name evovled to Browns Photo Studio. Their slogan was 'Makers of Portraits That Please.' The studio became prolific in documenting Jackson Ward in the early 20th century, providing a visual archive of what was known as the 'Harlem of the South'. Brown's studio photographed studio portraits, schools, events, fratnernal organizations, etc. Brown's daughter, Bessie Gwendola Brown, operated the studio until 1969. "], [" In the heart of Jackson Ward was the Deuce on 2nd Street, the home of the Hippodrome Theater. Originally in 1914, it was built as a vaudeville and movie theater for 1,050 people. It is located in the Jackson Ward district and attracted a mainly African-American audience. An entertainment mecca, the Deuce saw such people as Cab Calloway, Duke Ellington, Ella Fitzgerald and native Richmonder Bill 'Bojangles' Robinson grace its sidewalks and its clubs.", "The Hippodrome Theater was opened in 1914 by Charles A. Somma as a vaudeville and movie theater. The theater played a major role in the entertainment of Richmond's African-American community during the early 20th century. The Hippodrome Theater was a stop on the Chitlin' Circuit of places considered safe and acceptable for African American entertainers in the era of racial segregation in the United States.", " The Hippodrome is located on Second Street in Richmond, which was once known as The Deuce. The Deuce was a famous center of black commerce in Richmond and the street was lined with stores, restaurants, banks, and theaters. Essentially, The Deuce was the esteemed location in Richmond for black nightlife and The Hippodrome Theater was one of The Deuce's leading attractions from the 1920s to the 1940s. During this period, Richmond's African-American community was heavily influenced by New York City's Harlem Renaissance and the theater attracted big performers who were prominent in the cultural movement's performance scene"], ["'A trip to Richmond and a failure to visit the St. Luke Hall...would be like going to Washington D.C...and not seeing the Capitol.' - Washington Bee, June 27, 1914. In 1867, former slave Mary Prout, founded the Independent Order of St. Luke in Baltimore as a burial society and organization to tend to the elderly. The Richmond chapter was established in 1869 when members of the United Order of the True Reformers split off to establish another local organization. IOSL membership dwindled with William M.T. Forrester as the leader. The organization was headed towards collapse in 1899 when Maggie L. Walker took over. ", "Walker made it a priority to increase membership and bring in money to reinvest in financially supporting the African-American community both locally and nationally. In 1902 a printing department was established and thus the IOSL’s publication, the St. Luke Herald, was created in order to spread the word nationally about the organization. ", "In 1903, the St. Luke Penny Savings Bank was opened, making Maggie Walker the first women of any race to own a bank. She said of it's creation: “Let us put our moneys together; let us use our moneys; let us put our money out at usury among ourselves, and reap the benefit ourselves … Let us have a bank that will take the nickels and turn them into dollars.” In 1905 the St. Luke Emporium was opened. ","Since its creation, women had always played an important role in the operation of the IOSL. Walker prioritized hiring women to work in the national headquarters as she wanted to help meet the needs of working class black women. In fact, over half of the national advisory council was made up of women. ","In 1910, the Commonwealth of Virginia mandated that fraternal organizations and financial institutions had to be seperate from one another. This meant the Penny Savings Bank had to become independent of the IOSL. In 1930 greater competition with other black owned banks led the St. Luke bank to merge with Second Street Savings Bank and later the Commercial Bank and Trust to form the Consolidated Bank. In 2005, Abigail Adams purchased Consolidated Bank ending it's historic run as the oldest continuously black owned bank. In 2009 it merged with Premier Bank and continues to operate today at the corner of 1st and Marshall Streets in Jackson Ward. "],["John Mitchell, Jr. was born a slave in Richmond, Virginia in 1863, shortly before the end of the American Civil War and of slavery. ", "Mitchell served as editor of the Richmond Planet, an African American newspaper. He used the Planet to promote civil rights, racial justice, and racial pride. As an editor and an activist, he became a key figure in the antilynching movement and played an instrumental role in organizing the Richmond streetcar boycott of 1904."], ["Maggie Lena Walker was born Maggie Draper in Richmond, Virginia in 1864 to a mother who was a former slave. When she was 14 she began working at the Independent Order of St. Luke where she would eventually take over as President, significantly growing the membership and financial assets of the organization.", "In 1965, she left her teaching career and became grant matron of the Juvenile Branch of IOSL. Walker encouraged confidence and a sense of community to it's young members while also stressing the importance of education and service, particualrly for young black women. ", "In 1903 Walker became the first woman in the US, regardless of race, to charter a bank when she opened the St. Luke Penny Savings Bank as a part of the IOSL. Walker stated, 'Let us put our moneys together; let us use our moneys; let us put our money out at usury among ourselves, and reap the benefit ourselves … Let us have a bank that will take the nickels and turn them into dollars.'", "Maggie Walker's accomplishments went beyond her success with the IOSL. An avid civil rights advocate, she was cofounder of the Richmond National Association for the Advancement of Colored People chapter and the Council of Colored Women. She was also a leader in the anti-lynching movement. "], ["Miller’s/Eggleston hotel became a travel destination for black people from all over the country and a favorite stop-off of the stars. For decades, the Miller's/Eggleston Hotel was one of only three hotels in the city that permitted black guests. Its restaurant became a popular dining and gathering place.", "The hotel was built in 1904 by William “Buck” Miller and initially known as Miller’s Hotel. Neverett Eggleston Sr. bought it in the late 1930s and owned it until it was demolished in 2009 to make way for new development. The hotel was one of a handful in Richmond to offer African-Americans accommodations, a rarity in the segregated South.","Miller’s/Eggleston Hotel, the former Jackson Ward hotel that once welcomed such noted celebrities as Louis Armstrong, Count Basie and Redd Foxx is being honored with a state historical marker in Richmond."], ["Richmond Planet was an African-American owned and operated newspaper in Richmond Virginia, founded in 1882. It was founded by 13 former slaves in Richmond, with the first editor Edwin Archer Randolph, then John Mitchell Jr.  Edwin Archer Randolph was the first African-American graduate from Yale Law School, and John Mitchell was the editor for 45 years until his death in 1929. ","Richmond Plant reached a weekly circulation of 4200 and it had a reputation in the African-American community with the local, national and international news it covers. The Planet covers news especially with a focus on topics including segregation, voting rights, lynching, and depredation of the KKK. ", "The Planet continued after Mitchell's death in 1929 and merged with the Afro-Amerian in 1938. The Afro-American/Planet continued to report and ceased publication in 1996, as 'the longest running weekly Black newspaper in American' ended its legacy."], ["In 1867, Reverend John Jasper formed the Sixth Mount Zion Baptist Church in Richmond, Virginia. Two years later, the congregation moved to its current location on Duval Street in Jackson Ward. It is credited for being the first church in Richmond to be organized by a Black preacher.", "Though John Jasper passed away in 1901, the Sixth Mount Zion Baptist Church continued to grow. In 1925 the church was renovated and enlarged by black architect, Charles T. Russell. In the 1950's planners had designed the construction of Interstate 95 to cut through the Jackson Ward neighborhood which would require the demolition of the church as well as 700 homes. Rev. A.W. Brown rallied local organizations and universities to support the church's fight in demanding the interstate be built around them. In 1957, the Sixth Mount Zion Church was victorious as the building was spared in the construction. ", "I-95 significantly disrupted the Jackson Ward neighborhood by cutting it in half. After it's construction, the Sixth Mount Zion church congregation was reduced to only 125 people. In 2005, when Rev. Tyrone E. Nelson became pastor, he invigorated the community. Today, the congregation sits at just under 1000 members and remains a symbol of resilience in the community. "],["The Grand United Order of True Reformers was a national American American fraternal organization that began in 1873 in Alabama and Kentucky. It was managed by the all-white pro-temperance organization which was called the Independent Order of Good Templars. When William Washington Browne tried to apply for a membership at the Good Templar, he was denied because of his race. However, they agreed to form a separate charter under the name Grand United Order of Ture Reformers as an all-black affiliated group. ","In 1874 WW Browne quit his teaching job and focused on the United Order of True Reformers. Browne founded fifty local chapters, which met the requirements of the Good Templar for a state organization. He expanded and looked to the Colored Methodist Episcopal Church Conference of Alabama and was licensed to preach, and they ordained Browne in August 1876. In the same year, the Good Templars of Virginia invited Browne to start a new branch in Richmond. ","The plan to start the Reformers in Richmond was a challenge and Browne returned to Alabama shortly after to transform his society into a business organization, which include a bank and an insurance company. He moved back to Richmond and continued to work on the True Reformers. In 1881, Browne founded enough local chapters to form a “Grand Fountain”, and this sets the foundation for the largest and most successful black business enterprise in the United States between 1881 and 1910.", "With the help of Giles B Jackson, a member of the order, the Saving’s Bank of the Grand Fountain of the United Order of True Reformers was established on March 2, 1888. In 1889, the Bank became the first black-owned, black-operated financial institution in the country. In 1893, the True Reformers started a bi-monthly newspaper, the Reformer, which had a circulation of 8000 within a decade. William Washington Browne’s business was a model for other organizations, including Maggie’ Lena Walker’s Independent Order of Saint Luke."], ["William Washington Browne was born as a slave on October 20, 1849 in Habersham County Georgia to both of his slave parents Joseph Browne and Mariah Browne. He joined the Union army during Civil War after escaping from his owner, and became a teacher after discharging from the service. ","In January 1881, William Washington Browne founded the Grand Fountain in Richmond, Virginia. As the founder and the leader, Browne worked on helping the African American communities and the neighborhood to live independently from the white community and white-owned businesses. He believed in the thriving of the post-Civil War African American community. With the Grand Fountain, he established an insurance company that provides health care for sick people, as well as for land and property to encourage purchasing and investment.", "In 1888, the order received a state charter for a nation’s first black-owned and black-operated bank, which is the True Reformer’s bank. In May 1891, the Reformers moved to a building that houses all of the operations of the True Reformer’s order. The building contained a bank, a concert hall, a few offices, three stores, and four large meeting rooms. It was the largest black-owned building in Richmond that was also built by all African Americans.","The True Reformer’s bank was the only bank in Richmond that was able to survive and have continued business during the 1893 economic depression. W.W. Browne died in 1897, and the True Reformers band continued to prosper until the bank failed in 1910."]]
 
 
-//image loading
+/**
+ * **************** THIS FUNCTION IS TO LOAD THE STORIES AND FILL THE SOTRYDIV************************
+ */
 
 function storyDivLoader(city, i){
+    let storiesArray = null
+    let titleText = null
+    let storiesTextArray = null
+
+    // storyDiv.style.display = "block"
+
+    if (city == 'richmond'){
+        storiesArray = richmondStoriesArray
+        titleText = richmondTitleText
+        storiesTextArray = richmondStoriesTextArray
+    } else if (city == 'tulsa'){
+
+    }else if (city == 'durham'){
+
+    }
 
     if (imageDiv.hasChildNodes()){
         imageDiv.removeChild(imageDiv.childNodes[0])
     }
-const staticImage = document.createElement('img')
-staticImage.src = '/stories/' + city + '/'+richmondStoriesArray[i][0]+'/1.jpg'
+
+let staticImage = document.createElement('img')
+staticImage.src = '/stories/' + city + '/'+storiesArray[i][0]+'/1.jpg'
 staticImage.height = 250
 imageDiv.appendChild(staticImage)
+imageDiv.style.opacity =1
+
 
 //setting the text
-storyTitle.innerHTML = richmondTitleText[i]
-storyGraphOne.innerHTML = richmondStoriesTextArray[i][0]
+storyTitle.innerHTML = titleText[i]
+storyGraphOne.innerHTML = storiesTextArray[i][0]
 
 if (storyImageDiv.hasChildNodes()){
     storyImageDiv.removeChild(storyImageDiv.childNodes[0])
 }
+
 let firstStoryImage = document.createElement('img')
-firstStoryImage.src = '/stories/' + city + '/'+richmondStoriesArray[i][0]+'/1.jpg'
+firstStoryImage.src = '/stories/' + city + '/'+storiesArray[i][0]+'/1.jpg'
 firstStoryImage.height = 300
+firstStoryImage.style.right = "0"
 storyImageDiv.appendChild(firstStoryImage)
+storyImageDiv.style.opacity =1
+
 
 let storyInnerIndex = 0
 arrowDown.onclick = () => {
+    storyImageDiv.style.opacity ="0"
+    firstStoryImage.style.opacity ="0"
     storyInnerIndex++
-    storyInnerIndex = storyInnerIndex%richmondStoriesArray[i][1]
-   storyGraphOne.innerHTML = richmondStoriesTextArray[i][storyInnerIndex]
-   firstStoryImage.src = '/stories/' + city + '/'+richmondStoriesArray[i][0]+'/' + (storyInnerIndex+1) +'.jpg'
+    storyInnerIndex = storyInnerIndex%storiesArray[i][1]
+   storyGraphOne.innerHTML = storiesTextArray[i][storyInnerIndex]
+   firstStoryImage.src = '/stories/' + city + '/'+storiesArray[i][0]+'/' + (storyInnerIndex+1) +'.jpg'
+   storyImageDiv.style.opacity ="1"
+   firstStoryImage.style.opacity ="1"
   // console.log(i)
 }
 arrowUp.onclick = () => {
+    storyImageDiv.style.opacity =0
+    firstStoryImage.style.opacity =0
     storyInnerIndex--
    
       if(storyInnerIndex < 0){ storyInnerIndex = 0}
-      storyInnerIndex = Math.abs(-storyInnerIndex%richmondStoriesArray[i][1])
-   storyGraphOne.innerHTML = richmondStoriesTextArray[i][storyInnerIndex]
-   firstStoryImage.src = '/stories/' + city + '/'+richmondStoriesArray[i][0]+'/' + (storyInnerIndex+1) +'.jpg'
-   
+      storyInnerIndex = Math.abs(-storyInnerIndex%storiesArray[i][1])
+   storyGraphOne.innerHTML = storiesTextArray[i][storyInnerIndex]
+   firstStoryImage.src = '/stories/' + city + '/'+storiesArray[i][0]+'/' + (storyInnerIndex+1) +'.jpg'
+   storyImageDiv.style.opacity =1
+   firstStoryImage.style.opacity =1
 }
 
 }
+/**
+ *   **************** MANAGING ALL THE DIV ELEMENTS CLICK FUNCTIONS ************************
+ */
 
-
-//richmondbutton testing
-const richmondButtonImage = document.createElement('img')
-richmondButtonImage.src = '/assets/richmondButton.png'
-richmondButtonImage.width = 110
-richmondButtonImage.height = 80
-cityButton.appendChild(richmondButtonImage)
 
 /**
  * menu animation
@@ -164,6 +192,23 @@ menu.onclick = () => {
     aboutDiv.classList.toggle('open')
     
 }
+
+storyGraphOne.onclick = () => {
+    storyDiv.style.opacity = "0"
+}
+
+let storyImageLarge = false
+storyImageDiv.onclick = () => {
+    storyImageDiv.classList.toggle('open')
+    window.setTimeout(() => {storyImageLarge = !storyImageLarge}, 50) //because dom level events fire before the js ones....
+   
+}
+
+/**
+ * ************************* CITY BUTTONS TO EXPERIENCE **********************************
+ */
+ let orbPositionsX = []
+ let orbPositionsZ = []
 
 tulsaButton.onclick = () => {
     tulsaExperience = true
@@ -179,52 +224,92 @@ richmondButton.onclick = () => {
     richmondExperience = true
     landingPage = false
     richmondButton.style.visibility = "hidden"
+
+   gsap.to(camera.rotation, { duration: 2,  y: Math.PI * 0.5 })
+   gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
+
+   // ******************* ADDING MESHES TO THE SCENE ****************
+   orbPositionsX = []
+   orbPositionsZ = []
     for (let i = 0; i < richmondOrbMeshes.length; i++){
         scene.add(richmondOrbMeshes[i])
+        
         richmondOrbMeshes[i].position.x = (60/richmondOrbMeshes.length)*i-30
+        let zCircleFactor = richmondOrbMeshes.length
+        zCircleFactor -= i
+        zCircleFactor = Math.abs(zCircleFactor - i) * 0.9
+        console.log(zCircleFactor)
+        console.log(i)
         if (i%2!=0)  {
-            richmondOrbMeshes[i].position.z = -8
+            richmondOrbMeshes[i].position.z = -15 + zCircleFactor
         } else {
-            richmondOrbMeshes[i].position.z = 8
+            richmondOrbMeshes[i].position.z = 15 - zCircleFactor
         }
+
+        orbPositionsX.push(richmondOrbMeshes[i].position.x)
+        orbPositionsZ.push(richmondOrbMeshes[i].position.z)
+        
         
     }
-
+     console.log(orbPositionsX)
+   
  
     objectsToTest = []
      for (let i = 0; i <richmondOrbMeshes.length; i++){
         objectsToTest.push(richmondOrbMeshes[i])
         
     }
-    console.log(objectsToTest)
+
+    if (cityButton.hasChildNodes()){
+        cityButton.removeChild(cityButton.childNodes[0])
+    }
+    const richmondButtonImage = document.createElement('img')
+        richmondButtonImage.src = '/assets/richmondButton.png'
+        richmondButtonImage.width = 110
+        richmondButtonImage.height = 80
+        cityButton.appendChild(richmondButtonImage)
     
     cityButton.style.visibility = "visible"
-    gsap.to(camera.rotation, { duration: 1.5,  y: Math.PI * 0.5 })
+
+    
+
     scene.remove( landingPageGroup )
     controls.enabled = true
-    console.log(richmondExperience)
+    menu.style.visibility = "hidden"
+   
+
 }
- 
+
+cityButton.onclick = () => {
+    richmondExperience = false
+    durhamExperience = false
+    tulsaExperience = false
+    landingPage = true
+
+    scene.add( landingPageGroup )
+    for (let i = 0; i < richmondOrbMeshes.length; i++){
+        scene.remove(richmondOrbMeshes[i])
+    }
+    //need to remove for tulsa and durham
+
+    objectsToTest = []
+    objectsToTest = [ placeholder, postcardDurhamMesh.children[0],postcardDurhamMesh.children[1], postcardRichmondMesh.children[0] , postcardRichmondMesh.children[1], postcardTulsaMesh.children[0], postcardTulsaMesh.children[1] ]
+
+    gsap.to(camera.rotation, { duration: 0,  y: 0 })
+    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
+
+    controls.enabled = false
+    cityButton.style.visibility = "hidden"
+
+    gsap.to(postcardRichmondMesh.rotation, { duration: 2, y: 0, z: 0.399})
+    gsap.to(postcardRichmondMesh.position, { duration: 2, z: -0.01})
+
+    titleText.style.visibility = "visible"
+    paulText.style.visibility = "visible"
+    menu.style.visibility = "visible"
 
 
-
-
-
-// const params = {
-//     exposure: 1.0,
-//     toneMapping: 'ACESFilmic'
-// };
-
-// const toneMappingOptions = {
-//     None: THREE.NoToneMapping,
-//     Linear: THREE.LinearToneMapping,
-//     Reinhard: THREE.ReinhardToneMapping,
-//     Cineon: THREE.CineonToneMapping,
-//     ACESFilmic: THREE.ACESFilmicToneMapping,
-// };
-
-// const gui = new dat.GUI()
-// let guiExposure = null
+}
 
 
 /**
@@ -259,6 +344,8 @@ const loadingManager = new THREE.LoadingManager(
 // const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const textureLoader = new THREE.TextureLoader(loadingManager)
+const audioLoader = new THREE.AudioLoader();
+
 
 
 
@@ -621,6 +708,16 @@ scene.add(camera)
 // gui.add(camera.rotation, 'y').min(-5).max(5).step(0.001).name("camROT.y")
 // gui.add(camera.rotation, 'z').min(-5).max(5).step(0.001).name("camROT.z")
 
+
+// *********************** loading AUDIO FILES
+
+const audioListener = new THREE.AudioListener();
+camera.add( audioListener );
+const landingPageSound = new THREE.Audio( audioListener );
+scene.add(landingPageSound)
+
+audioLoader.load( '/audio/landingPage.ogg', ( audioBuffer ) => {landingPageSound.setBuffer( audioBuffer ); landingPageSound.play() })
+
 /**
  * MOUSE
  */
@@ -631,6 +728,8 @@ window.addEventListener('mousemove', (e) => {
     
 })
 
+let currentObject = null //variable to set to see if we are clicking the same object
+let clickFlag = 0 // to keep track of the clicks
 window.addEventListener('click', () => {
   
     if(currentIntersects){
@@ -705,12 +804,40 @@ window.addEventListener('click', () => {
  * *************************** RICHMOND  OBJECTS TO TEST *********************************************
  */
  if(richmondExperience) {
- 
+    
     for (let i = 0; i <richmondOrbMeshes.length; i++){
+        
         if (currentIntersects.object === richmondOrbMeshes[i]){
-            console.log(richmondTitleText[i])
-            storyDivLoader("richmond", i)
-            storyDiv.style.visibility = "visible"
+            // console.log(orbPositions)
+            
+            // storyDiv.style.opacity = "1"
+            //
+            let originalPosition = richmondOrbMeshes[i].position
+            console.log(storyImageLarge)
+
+             if( !storyImageLarge ) {
+            if (currentObject === richmondOrbMeshes[i] && clickFlag == 1){
+                gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i],  z: orbPositionsZ[i], ease: "circ"})
+                clickFlag = 0
+                storyDiv.style.opacity = "0"
+                window.setTimeout(() => {storyDiv.style.visibility = "hidden"}, 500)
+            } else { 
+                storyDivLoader("richmond", i)
+                storyDiv.style.opacity = "1"
+                storyDiv.style.visibility = "visible"
+                gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x:-5, z: 5, ease: "circ"})
+                gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
+                gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
+                
+                clickFlag = 1
+            }
+            
+            // window.setTimeout(() => {console.log(richmondOrbMeshes[i].position)}, 2000)
+            currentObject = richmondOrbMeshes[i]
+        
+        }
+            
+
         }
     }
  
@@ -795,7 +922,7 @@ const tick = () =>
     raycaster.setFromCamera(mouse, camera)
 
    if(!landingPage){
-    controls.update()
+   // controls.update()
     // console.log('not landing')
    }
 
