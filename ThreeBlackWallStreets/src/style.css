@@ -283,7 +283,7 @@ body
   -o-transition: .5s ;
   transition:.5s ;
   opacity: 0;
-  /* display: none; */
+  display: none;
  
   /* visibility: hidden; */
   /* margin-right: -100%; */
@@ -365,6 +365,24 @@ font-size: 150%;
   /* transform: skewY(40deg); */
   text-align: center;
   color: black;
+
+}
+
+.orbInstruction
+{
+  font-family: roboto, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 150%;
+  position: absolute;
+  text-align: center;
+  color: black;
+  margin-top: 2%;
+  top: 0;
+  left: 50%;
+  visibility: hidden;
+  
+  transform: translateX(-50%);
 
 }
   
@@ -531,17 +549,32 @@ border-width: thin;
   }  
 
 
-.cityButton
+.backButton
 {
   position: absolute;
   top:0;
-  left: 5;
+  left: 2%;
   height:80px;
   width: 110px;
   text-align: center;
   padding-top: 5px;
   padding-left: 5px;
   visibility: hidden;
+  cursor: pointer;
+}
+
+.cityButton
+{
+  position: absolute;
+  top:4%;;
+  right: 0;
+  height:174px;
+  width: 256px;
+  text-align: center;
+  padding-top: 5px;
+  padding-right: 5px;
+  visibility: hidden;
+  cursor: pointer;
 }
 
 .audioDiv

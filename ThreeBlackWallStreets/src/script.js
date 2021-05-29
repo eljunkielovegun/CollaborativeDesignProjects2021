@@ -37,6 +37,7 @@ const richmondButton = document.getElementsByClassName('richmondButton')[0]
 
 //buttonBack city
 
+const backButton = document.querySelector('.backButton')
 const cityButton = document.querySelector('.cityButton')
 
 //get story div elements 
@@ -50,6 +51,7 @@ const arrowUp = document.getElementsByClassName('arrowUp')[0]
 const arrowDown = document.getElementsByClassName('arrowDown')[0]
 
 const audioDiv = document.querySelector('.audioDiv')
+const orbInstruction = document.querySelector('.orbInstruction')
 
 
 
@@ -67,7 +69,11 @@ audioOffImage.width = 100
 audioOffImage.height = 100
 audioDiv.appendChild(audioOffImage)
 
-
+const backButtonImage = document.createElement('img')
+backButtonImage.src = '/assets/back.svg'
+backButtonImage.width = 110
+backButtonImage.height = 80
+backButton.appendChild(backButtonImage)
 
 
 const kpImage = document.createElement('img')
@@ -261,6 +267,7 @@ audioDiv.onclick = () => {
  * ************************* CITY BUTTONS TO EXPERIENCE **********************************
  */
  let orbPositionsX = []
+ let orbPositionsY = []
  let orbPositionsZ = []
 
 tulsaButton.onclick = () => {
@@ -273,33 +280,46 @@ durhamButton.onclick = () => {
     landingPage = false
     durhamButton.style.visibility = "hidden"
 }
+
+
 richmondButton.onclick = () => {
     richmondExperience = true
     landingPage = false
     richmondButton.style.visibility = "hidden"
+    orbInstruction.style.visibility = "visible"
+
+    orbInstruction.innerHTML = "Welcome to Jackson Ward, Richmond, Va. Click on an Orb to learn more about this thriving community"
 
    gsap.to(camera.rotation, { duration: 2,  y: Math.PI * 0.5 })
    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
 
    // ******************* ADDING MESHES TO THE SCENE ****************
    orbPositionsX = []
+   orbPositionsY = []
    orbPositionsZ = []
     for (let i = 0; i < richmondOrbMeshes.length; i++){
         scene.add(richmondOrbMeshes[i])
         
-        richmondOrbMeshes[i].position.x = (60/richmondOrbMeshes.length)*i-30
+        richmondOrbMeshes[i].position.x = -18
+        
+        richmondOrbMeshes[i].position.z = (50/richmondOrbMeshes.length)*i -20
         let zCircleFactor = richmondOrbMeshes.length
         zCircleFactor -= i
         zCircleFactor = Math.abs(zCircleFactor - i) * 0.9
         //console.log(zCircleFactor)
         //console.log(i)
+
         if (i%2!=0)  {
-            richmondOrbMeshes[i].position.z = -15 + zCircleFactor
+            
+        richmondOrbMeshes[i].position.y = 4
         } else {
-            richmondOrbMeshes[i].position.z = 15 - zCircleFactor
+           
+            richmondOrbMeshes[i].position.y = -4
+
         }
 
         orbPositionsX.push(richmondOrbMeshes[i].position.x)
+        orbPositionsY.push(richmondOrbMeshes[i].position.y)
         orbPositionsZ.push(richmondOrbMeshes[i].position.z)
         
         
@@ -316,18 +336,23 @@ richmondButton.onclick = () => {
     if (cityButton.hasChildNodes()){
         cityButton.removeChild(cityButton.childNodes[0])
     }
-    const richmondButtonImage = document.createElement('img')
-        richmondButtonImage.src = '/assets/richmondButton.png'
-        richmondButtonImage.width = 110
-        richmondButtonImage.height = 80
-        cityButton.appendChild(richmondButtonImage)
+
+    const richmondCityImage = document.createElement('img')
+    richmondCityImage.src = '/assets/richmondButton.png'
+    richmondCityImage.width = 110
+    richmondCityImage.height = 80
+    cityButton.appendChild(richmondCityImage)
+
+
     
+    backButton.style.visibility = "visible"
     cityButton.style.visibility = "visible"
+    titleText.style.visibility = "hidden"
 
     
 
     scene.remove( landingPageGroup )
-    controls.enabled = true
+    // controls.enabled = true
     menu.style.visibility = "hidden"
 
     //dispose all landingpage materials, textures, geometries
@@ -345,11 +370,12 @@ richmondButton.onclick = () => {
 
 }
 
-cityButton.onclick = () => {
+backButton.onclick = () => {
     richmondExperience = false
     durhamExperience = false
     tulsaExperience = false
     landingPage = true
+    orbInstruction.style.visibility = "hidden"
     
     if(storyImageLarge){
         storyImageDiv.classList.toggle('open')
@@ -371,7 +397,7 @@ cityButton.onclick = () => {
     gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
 
     controls.enabled = false
-    cityButton.style.visibility = "hidden"
+    backButton.style.visibility = "hidden"
 
     gsap.to(postcardRichmondMesh.rotation, { duration: 2, y: 0, z: 0.399})
     gsap.to(postcardRichmondMesh.position, { duration: 2, z: -0.01})
@@ -888,18 +914,21 @@ window.addEventListener('click', () => {
             
             let originalPosition = richmondOrbMeshes[i].position
            
-            console.log(clickFlag)
+            
              if( !storyImageLarge && !storyImageMouseover ) {
                 if (currentObject === richmondOrbMeshes[i] && clickFlag == 1){
-                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i],  z: orbPositionsZ[i], ease: "circ"})
+                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i], y:orbPositionsY[i],  z: orbPositionsZ[i], ease: "circ"})
                     clickFlag = 0
                     storyDiv.style.opacity = "0"
-                    window.setTimeout(() => {storyDiv.style.visibility = "hidden"}, 500)
+                    window.setTimeout(() => {storyDiv.style.visibility = "hidden"; storyDiv.style.display = "none"}, 550)
                 } else if(clickFlag == 0 ) { 
                     storyDivLoader("richmond", i)
-                    storyDiv.style.opacity = "1"
-                    storyDiv.style.visibility = "visible"
-                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x:-5, z: 5, ease: "circ"})
+                    storyDiv.style.display = "block"
+                    window.setTimeout(() => {storyDiv.style.opacity = "1"; storyDiv.style.visibility = "visible"}, 550)
+                
+                    
+                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x:-5, y: 0, z: 5, ease: "circ"})
+                    gsap.to(richmondOrbMeshes[i].rotation, {  duration: 2, x:0, y: Math.PI * 2, z: 0, ease: "circ"})
                     gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
                     gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
                     
@@ -1008,6 +1037,7 @@ const tick = () =>
     let tulsaHover = false
 
     if(intersects.length){
+        canvas.style.cursor = "pointer"
         // currentIntersects === null
         
         // console.log(intersects)
@@ -1045,6 +1075,7 @@ const tick = () =>
         currentIntersects = intersects[0] 
 
         } else {
+            canvas.style.cursor = "default"
         if(landingPage && !aboutDivOpen){
              if(currentIntersects){
                 //console.log('out');
