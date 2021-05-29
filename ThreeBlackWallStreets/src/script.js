@@ -1,11 +1,9 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
 import * as dat from 'dat.gui'
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js'
-import { AdditiveBlending, Texture } from 'three'
 
 
 /**
@@ -201,15 +199,21 @@ arrowUp.onclick = () => {
 /**
  * menu animation
  */
+ 
+ let aboutDivOpen = false
 menu.onclick = () => {
     menu.classList.toggle('open')
     aboutDiv.classList.toggle('open')
-    
+    aboutDivOpen = !aboutDivOpen
+    //console.log(aboutDivOpen)
 }
 
-storyGraphOne.onclick = () => {
-    storyDiv.style.opacity = "0"
-}
+
+
+
+// storyGraphOne.onclick = () => {
+//     storyDiv.style.opacity = "0"
+// }
 
 let storyImageLarge = false
 storyImageDiv.onclick = () => {
@@ -217,6 +221,16 @@ storyImageDiv.onclick = () => {
     window.setTimeout(() => {storyImageLarge = !storyImageLarge}, 50) //because dom level events fire before the js ones....
    
 }
+let storyImageMouseover = false
+storyDiv.onmouseover = () => {
+   
+    window.setTimeout(() => {storyImageMouseover = true}, 50)
+}
+storyDiv.onmouseout = () => {
+    
+    window.setTimeout(() => {storyImageMouseover = false}, 50)
+}
+
 
 let audioOn = false
 audioDiv.onclick = () => {
@@ -277,8 +291,8 @@ richmondButton.onclick = () => {
         let zCircleFactor = richmondOrbMeshes.length
         zCircleFactor -= i
         zCircleFactor = Math.abs(zCircleFactor - i) * 0.9
-        console.log(zCircleFactor)
-        console.log(i)
+        //console.log(zCircleFactor)
+        //console.log(i)
         if (i%2!=0)  {
             richmondOrbMeshes[i].position.z = -15 + zCircleFactor
         } else {
@@ -290,7 +304,7 @@ richmondButton.onclick = () => {
         
         
     }
-     console.log(orbPositionsX)
+     //console.log(orbPositionsX)
    
  
     objectsToTest = []
@@ -315,7 +329,19 @@ richmondButton.onclick = () => {
     scene.remove( landingPageGroup )
     controls.enabled = true
     menu.style.visibility = "hidden"
-   
+
+    //dispose all landingpage materials, textures, geometries
+
+    postcardGeometry.dispose()
+    for (let i; i < landingPageTexturesArray.length; i++){
+        landingPageTexturesArray[i].dispose()
+    }
+    for (let i; i < landingMaterialArray.length; i++){
+        landingMaterialArray[i].dispose()
+    }
+
+
+    console.log(renderer.info)
 
 }
 
@@ -324,6 +350,11 @@ cityButton.onclick = () => {
     durhamExperience = false
     tulsaExperience = false
     landingPage = true
+    
+    if(storyImageLarge){
+        storyImageDiv.classList.toggle('open')
+        storyImageLarge = false
+    }
 
     storyDiv.style.visibility = "hidden"
 
@@ -349,6 +380,14 @@ cityButton.onclick = () => {
     paulText.style.visibility = "visible"
     menu.style.visibility = "visible"
 
+    //dispose 
+    orbGeometry.dispose()
+    for (let i = 0; i < richmondOrbMeshes.length; i++){
+        scene.remove(richmondOrbMeshes[i])
+        richmondOrbTextures[i].dispose()
+        richmondOrbMaterials[i].dispose()
+    }
+
 
 }
 
@@ -371,7 +410,7 @@ const loadingManager = new THREE.LoadingManager(
             loadingBarElement.classList.add('ended')
             loadingBarElement.style.transform = ''
         }, 500)
-        
+        console.log(renderer.info)
     },
 
     // Progress
@@ -428,14 +467,7 @@ const paperNorm = textureLoader.load('/textures/paper/NORM.jpg')
 const paperOcc = textureLoader.load('/textures/paper/OCC.jpg')
 const paperRough = textureLoader.load('/textures/paper/ROUGH.jpg')
 
-/**
- *  loading pictures for orbs
- */
-
- 
-const maggieWalker = textureLoader.load('/stories/richmond/maggiewalker/2.jpg')
-// '/stories/richmond/'+richmondStoriesArray[5][0]+'/1.jpg'
-// 
+const landingPageTexturesArray = [durhamPostcardBW, richmondPostcardBW, tulsaPostcardBW, durhamPostcardColor, richmondPostcardColor, tulsaPostcardColor, durhamPostcardBack, richmondPostcardBack, tulsaPostcardBack, postcard1, postcard2, postcard3, postcard4,paperColor, paperDisplacement, paperNorm, paperOcc, paperRough]
 
 
 /**
@@ -594,7 +626,7 @@ landingPageGroup.add( postcard1mesh, postcard2mesh, postcard3mesh, postcard4mesh
 
 scene.add(landingPageGroup)
 
- let landingMaterialArray =  [postcardRichmondMaterialFront, postcardRichmondMaterialBack, postcardTulsaMaterialFront, postcardTulsaMaterialBack , postcardDurhamMaterialFront, postcardDurhamMaterialBack, postcard1Material, postcard2Material, postcard3Material, postcard4Material]
+ let landingMaterialArray =  [postcardRichmondMaterialFront, postcardRichmondMaterialBack, postcardTulsaMaterialFront, postcardTulsaMaterialBack , postcardDurhamMaterialFront, postcardDurhamMaterialBack, postcard1Material, postcard2Material, postcard3Material, postcard4Material, backgroundMaterial, backgroundPlaneGeometry ]
  /**
  * postcard positions ***********************
  */
@@ -715,7 +747,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-console.log(sizes.height)
+
 
 const raycaster = new THREE.Raycaster()
 
@@ -780,7 +812,7 @@ window.addEventListener('click', () => {
 /**
  * *************************** LANDING PAGE OBJECTS TO TEST *********************************************
  */
-        if(landingPage) {
+        if(landingPage && !aboutDivOpen) {
             if(currentIntersects.object === postcardDurhamMesh.children[0]){
            
             gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: -Math.PI, z: 0})
@@ -851,33 +883,33 @@ window.addEventListener('click', () => {
     for (let i = 0; i <richmondOrbMeshes.length; i++){
         
         if (currentIntersects.object === richmondOrbMeshes[i]){
-            // console.log(orbPositions)
             
-            // storyDiv.style.opacity = "1"
-            //
+            
+            
             let originalPosition = richmondOrbMeshes[i].position
-            console.log(storyImageLarge)
-
-             if( !storyImageLarge ) {
-            if (currentObject === richmondOrbMeshes[i] && clickFlag == 1){
-                gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i],  z: orbPositionsZ[i], ease: "circ"})
-                clickFlag = 0
-                storyDiv.style.opacity = "0"
-                window.setTimeout(() => {storyDiv.style.visibility = "hidden"}, 500)
-            } else { 
-                storyDivLoader("richmond", i)
-                storyDiv.style.opacity = "1"
-                storyDiv.style.visibility = "visible"
-                gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x:-5, z: 5, ease: "circ"})
-                gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
-                gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
-                
-                clickFlag = 1
-            }
+           
+            console.log(clickFlag)
+             if( !storyImageLarge && !storyImageMouseover ) {
+                if (currentObject === richmondOrbMeshes[i] && clickFlag == 1){
+                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i],  z: orbPositionsZ[i], ease: "circ"})
+                    clickFlag = 0
+                    storyDiv.style.opacity = "0"
+                    window.setTimeout(() => {storyDiv.style.visibility = "hidden"}, 500)
+                } else if(clickFlag == 0 ) { 
+                    storyDivLoader("richmond", i)
+                    storyDiv.style.opacity = "1"
+                    storyDiv.style.visibility = "visible"
+                    gsap.to(richmondOrbMeshes[i].position, {  duration: 2, x:-5, z: 5, ease: "circ"})
+                    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
+                    gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
+                    
+                    clickFlag = 1
+                }
             
+                currentObject = richmondOrbMeshes[i]
             // window.setTimeout(() => {console.log(richmondOrbMeshes[i].position)}, 2000)
-            currentObject = richmondOrbMeshes[i]
-        
+            
+            console.log(clickFlag)
         }
             
 
@@ -911,11 +943,6 @@ window.addEventListener('click', () => {
 
 })
 
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
-controls.enabled = false
-
 /**
  * Renderer
  */
@@ -932,6 +959,11 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.shadowMapSoft = true;
+
+// Controls
+const controls = new OrbitControls(camera, canvas, renderer.domElement)
+controls.enableDamping = true
+controls.enabled = false
 
 
 let currentIntersects = null
@@ -971,46 +1003,51 @@ const tick = () =>
 
     const intersects = raycaster.intersectObjects(objectsToTest)
     
+    let durhamHover = false
+    let richmondHover = false
+    let tulsaHover = false
 
     if(intersects.length){
         // currentIntersects === null
-
-        if(currentIntersects === null){
-            console.log('in')
+        
+        // console.log(intersects)
+        // if(currentIntersects === null ){
+            //console.log('in')
             
-        if(landingPage){
+        if(landingPage && !aboutDivOpen){
             
                 if(intersects[0].object.name === 'durhamPostcard') {
                 postcardDurhamMesh.children[0].material.map = durhamPostcardColor
-                console.log(intersects)
+                // console.log(intersects)
+            //     postcardRichmondMesh.children[0].material.map= richmondPostcardBW
+            // postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
                 
-            } 
-            if(intersects[0].object.name === 'richmondPostcard') {
+                } else { postcardDurhamMesh.children[0].material.map = durhamPostcardBW     }
+            
+                if(intersects[0].object.name === 'richmondPostcard') {
                 postcardRichmondMesh.children[0].material.map= richmondPostcardColor
-                console.log(intersects)
-            }
-            if(intersects[0].object.name === 'tulsaPostcard') {
+            
+                } else { postcardRichmondMesh.children[0].material.map= richmondPostcardBW}
+                
+                if(intersects[0].object.name === 'tulsaPostcard') {
                 postcardTulsaMesh.children[0].material.map= tulsaPostcardColor
-                // gsap.to(postcardDurhamMesh.rotation, { duration: 1, y: 0})
-              
-            }
-        }
+                } else { postcardTulsaMesh.children[0].material.map= tulsaPostcardBW }
+
+        } 
 
         if(richmondExperience){
-   
             for (let i = 0; i <richmondOrbMeshes.length; i++){
                 if(intersects[0].object.name === richmondStoriesArray[i][0]){
-                    console.log(richmondStoriesArray[i][0])
+                    // console.log(richmondStoriesArray[i][0])
                 }
             }
         }
         currentIntersects = intersects[0] 
-        }
-        
-    } else {
-        if(landingPage){
+
+        } else {
+        if(landingPage && !aboutDivOpen){
              if(currentIntersects){
-                console.log('out');
+                //console.log('out');
                 postcardDurhamMesh.children[0].material.map = durhamPostcardBW
                 postcardRichmondMesh.children[0].material.map= richmondPostcardBW
                 postcardTulsaMesh.children[0].material.map= tulsaPostcardBW
@@ -1020,7 +1057,7 @@ const tick = () =>
     
     if(richmondExperience){
         if(currentIntersects){
-            console.log('out');
+            //console.log('out');
     }
     currentIntersects = null
     }
