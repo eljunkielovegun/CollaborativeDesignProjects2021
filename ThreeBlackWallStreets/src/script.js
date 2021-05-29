@@ -51,9 +51,23 @@ const storyImageDiv = document.querySelector('.storyImageDiv')
 const arrowUp = document.getElementsByClassName('arrowUp')[0]
 const arrowDown = document.getElementsByClassName('arrowDown')[0]
 
+const audioDiv = document.querySelector('.audioDiv')
 
 
 
+
+
+const audioOnImage = document.createElement('img')
+audioOnImage.src = '/assets/speaker.svg'
+audioOnImage.width = 100
+audioOnImage.height = 100
+// audioDiv.appendChild(audioOnImage)
+
+const audioOffImage = document.createElement('img')
+audioOffImage.src = '/assets/speaker-off.svg'
+audioOffImage.width = 100
+audioOffImage.height = 100
+audioDiv.appendChild(audioOffImage)
 
 
 
@@ -204,6 +218,31 @@ storyImageDiv.onclick = () => {
    
 }
 
+let audioOn = false
+audioDiv.onclick = () => {
+    
+    audioOn = !audioOn
+    if (audioDiv.hasChildNodes()){
+        audioDiv.removeChild(audioDiv.childNodes[0])
+    }
+    
+
+    if (audioOn == true) {
+        audioDiv.appendChild(audioOnImage)
+        landingPageSound.play();
+        landingPageSound.setVolume(0.8)
+        
+    }
+    if (audioOn == false) {
+        audioDiv.appendChild(audioOffImage)
+        landingPageSound.setVolume(0.0)
+      
+        
+}
+
+
+}
+
 /**
  * ************************* CITY BUTTONS TO EXPERIENCE **********************************
  */
@@ -286,6 +325,8 @@ cityButton.onclick = () => {
     tulsaExperience = false
     landingPage = true
 
+    storyDiv.style.visibility = "hidden"
+
     scene.add( landingPageGroup )
     for (let i = 0; i < richmondOrbMeshes.length; i++){
         scene.remove(richmondOrbMeshes[i])
@@ -344,7 +385,7 @@ const loadingManager = new THREE.LoadingManager(
 // const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const textureLoader = new THREE.TextureLoader(loadingManager)
-const audioLoader = new THREE.AudioLoader();
+const audioLoader = new THREE.AudioLoader(loadingManager);
 
 
 
@@ -382,7 +423,7 @@ const postcard4 = textureLoader.load('/postcardBack/4.jpg')
  * paper texture
  */
 const paperColor = textureLoader.load('/textures/paper/COLOR.jpg')
-const paperDisplacement = textureLoader.load('/textures/paper/DISP.png')
+const paperDisplacement = textureLoader.load('/textures/paper/DISP.jpg')
 const paperNorm = textureLoader.load('/textures/paper/NORM.jpg')
 const paperOcc = textureLoader.load('/textures/paper/OCC.jpg')
 const paperRough = textureLoader.load('/textures/paper/ROUGH.jpg')
@@ -595,12 +636,12 @@ postcard4mesh.receiveShadow =  true
  * Environment map
  */
 const environmentMap = cubeTextureLoader.load([
-    '/textures/environmentMaps/0/px.png',
-    '/textures/environmentMaps/0/nx.png',
-    '/textures/environmentMaps/0/py.png',
-    '/textures/environmentMaps/0/ny.png',
-    '/textures/environmentMaps/0/pz.png',
-    '/textures/environmentMaps/0/nz.png'
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg'
 ])
 
 environmentMap.encoding = THREE.sRGBEncoding
@@ -716,7 +757,9 @@ camera.add( audioListener );
 const landingPageSound = new THREE.Audio( audioListener );
 scene.add(landingPageSound)
 
-audioLoader.load( '/audio/landingPage.ogg', ( audioBuffer ) => {landingPageSound.setBuffer( audioBuffer ); landingPageSound.play() })
+audioLoader.load( '/audio/landingPage.ogg', ( audioBuffer ) => {landingPageSound.setBuffer( audioBuffer ) ;   landingPageSound.setLoop(true) })
+
+//landingPageSound.play()
 
 /**
  * MOUSE

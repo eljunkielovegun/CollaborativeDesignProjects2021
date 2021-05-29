@@ -308,6 +308,8 @@ border-width: thick;
   -moz-transition: .4s ;
   -o-transition: .4s ;
   transition: .4s ;
+  -webkit-transform: skewY(-45deg);
+  -moz-transform: skewY(-45deg);
   transform: skewY(-45deg);
   overflow-y: auto;
   background: #ffffff;
@@ -532,6 +534,17 @@ border-width: thin;
   padding-top: 5px;
   padding-left: 5px;
   visibility: hidden;
+}
+
+.audioDiv
+{ 
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  height: 100px;
+  width: 100px;
+z-index: 2;
+cursor: pointer;
 }
 
 ::-webkit-scrollbar {
