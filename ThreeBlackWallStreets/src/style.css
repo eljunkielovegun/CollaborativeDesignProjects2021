@@ -200,8 +200,8 @@ body
 {
     font-family: roboto, sans-serif;
     font-style: normal;
-    font-weight: 300;
-    font-size: 350%;
+    font-weight: 400;
+    /* font-size: 40px; */
     /* display: hidden; */
     visibility: hidden;
     position: absolute;
@@ -228,6 +228,11 @@ body
     transform: translate(100%, 0%);
     overflow-y: auto;
     background: #ffffff;
+}
+
+.aboutText
+{
+   font-size: 12pt;
 }
 
 .aboutDiv.open
@@ -452,7 +457,7 @@ font-weight: 900;
 font-style: normal;
 font-size: 150%;
 
-
+  padding-top: 5px;
   position: absolute;
   right: 0;
   top: 45%;
@@ -468,7 +473,7 @@ font-size: 150%;
 .orbInstruction
 {
   font-family: roboto, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   font-size: 150%;
   position: absolute;
@@ -478,6 +483,7 @@ font-size: 150%;
   top: 0;
   left: 50%;
   visibility: hidden;
+  /* background-color: rgba(252, 250, 250, 0.342); */
   
   transform: translateX(-50%);
 
@@ -485,13 +491,20 @@ font-size: 150%;
   
 .storyGraphOne
 {
- /* padding-top: 30px; */
- padding-left: 30px;
+ /* padding-top: 15px; */
+ font-weight: 500;
+ font-size: 120%;
+ right: 0;
+  top: 8%;
+  left: 65%;
+ position: absolute;
+ padding-right: 2%;
+ padding-left: 3%;
  -webkit-transition: .4s ;
  -moz-transition: .4s ;
  -o-transition: .4s ;
  transition: .4s ;
- height: 325px;
+ height: 300px;
  overflow-y: auto;
  
 }
@@ -666,15 +679,16 @@ border-width: thin;
 .cityButton
 {
   position: absolute;
-  top:4%;;
+  top:5%;
+  float: right;
   right: 0;
   height:174px;
   width: 256px;
   text-align: center;
   padding-top: 5px;
   padding-right: 5px;
-  visibility: hidden;
-  cursor: pointer;
+  /* visibility: hidden; */
+  /* cursor: pointer; */
 }
 
 .audioDiv
@@ -705,3 +719,149 @@ cursor: pointer;
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; }
+
+  .timeline {
+    display: none;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translate(-50%);
+    width:75%;
+    height: 20px;
+    list-style: none;
+    text-align: justify;
+    margin: 80px auto;
+    background: white;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,1) 51%, rgba(255,255,255,0) 57%, rgba(255,255,255,0) 100%);
+  }
+
+  .timeline:after {
+    display: inline-block;
+    content: "";
+    width: 100%;
+}
+
+.timeline li {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: white;
+	text-align: center;
+	line-height: 1.2;
+	position: relative;
+	border-radius: 50%;
+  margin-left: 70px;
+  left:0;
+}
+.timeline li:before {
+	display: inline-block;
+	content: attr(orbNames);
+	font-size: 12pt;
+  width: 200px;
+  color: white;
+  font-family: roboto, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 10pt;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.timeline li:nth-child(odd):before {
+	top: -40px;
+}
+.timeline li:nth-child(even):before {
+	bottom: -40px;
+}
+
+/* .timeline li:nth-child(odd):after {
+	bottom: 0;
+	margin-bottom: -10px;
+	transform: translate(-50%, 100%);
+}
+.timeline li:nth-child(even):after {
+	top: 0;
+	margin-top: -10px;
+	transform: translate(-50%, -100%);
+} */
+
+  /* .timelineContainer
+  {
+    position: absolute;
+  top:4%;
+  left: 1.5%;
+  text-align: center;
+  padding-top: 5px;
+  padding-right: 5px;
+  transform: tranlateY(50%);
+  }
+
+  .timeline ul li {
+
+    list-style-type: none;
+    position: relative;
+    width: 1px;
+    margin: 0 auto;
+    padding-top: 30px;
+    background: #fff;
+    
+    text-align: left;
+    background-color: white;
+  }
+   
+  .timeline ul li::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: inherit;
+    z-index: 1;
+  }
+
+  .timeline ul li div {
+    position: relative;
+    bottom: -5px;
+    width: 400px;
+    padding-left: 10px;
+    background:transparent;
+    color: white;
+    font-family: roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 100%;
+
+  }
+  
+  .timeline ul li div::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+  } */
+
+/* 
+.timeline ul li:nth-child(odd) div {
+  left: 45px;
+}
+
+.timeline ul li:nth-child(odd) div::before {
+  left: -15px;
+  border-width: 8px 16px 8px 0;
+  border-color: transparent #F45B69 transparent transparent;
+}
+
+.timeline ul li:nth-child(even) div {
+  left: -439px;
+}
+
+.timeline ul li:nth-child(even) div::before {
+  right: -15px;
+  border-width: 8px 0 8px 16px;
+  border-color: transparent transparent transparent #F45B69;
+} */

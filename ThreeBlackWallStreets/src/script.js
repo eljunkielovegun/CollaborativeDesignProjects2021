@@ -53,6 +53,8 @@ const arrowDown = document.getElementsByClassName('arrowDown')[0]
 const audioDiv = document.querySelector('.audioDiv')
 const orbInstruction = document.querySelector('.orbInstruction')
 
+const timeline = document.querySelector('.timeline')
+
 
 
 
@@ -164,7 +166,7 @@ const durhamStoriesTextArray = [["Dr. Aaron McDuffie Moore graduated from Shaw U
 //tulsa story stuff
 const tulsaTitleText = ["Dr. Andrew Cheesten (AC) Jackson","A.J. Smitherman","Buck Colbert (BC) Franklin","Booker Taliaferro Washington","Ellis Walker (EW) Woods","J.B. Stradford","John Williams","Loula Williams","Mabel Little","O.B. Mann & McKinley Mann","Dr. Olivia Hooker","Ottawa (OW) Gurley","Reverend R.A. Whitaker","Simon Berry","S.M. Jackson"]
 const tulsaStoriesArray = [["acjackson",2],["ajsmitherman", 2],["bcfranklin",3],["bookertwashington",2],["ewwoods",2],["jbstradford",2],["johnwilliams",2],["loulawilliams",2],["mabellittle",3],["mannbrothers",2],["oliviahooker",3],["owgurley",4],["revrawhitaker",2],["simonberry",3],["smjackson",1]]
-const tulsaStoriesTextArray = [["At 42 years of age, Dr. Andrew Cheesten (AC) Jackson was one of the most successful and talented doctors in the United States, acclaimed by the Mayo Clinic brothers. ", "In 1918, Dr. Jackson established the Booker T. Washington Hospital for Negros, on the corner of Boston Ave. and Archer St. Dr. Jackson was also on the board of directors of the Colored Orphan Home for Tulsa, serving his community in all aspects of his life. "],["A.J. Smitherman was a publisher who founded the Tulsa Star, a Black newspaper headquartered in Greenwood, which was instrumental in establishing the district’s socially-conscious mindset.","Before the Massacre, Smitherman’s properties were valued at more than $40,000. After the Massacre, Smitherman left Tulsa with his family, ending up in Buffalo, New York. In Buffalo, he started a new newspaper, the Buffalo/Empire Star, which ran until shortly after his death in 1961."],["Buck Colbert (BC) Franklin was a lawyer whose career focused on defending the survivors of the Tulsa Race Massacre of 1921 in the rebuilding of Greenwood.","After the Massacre, The Tulsa City Council at first passed a law which prevented the Black Greenwood community to rebuild what had been destroyed. Because of BC Franklin, who led the legal battle before the Oklahoma Supreme Court, Tulsa residents were able to rebuild their community.","Today, the BC Franklin Park stands in honor of the life of this resilient and diligent Black man, and his legacy of working for his community. "],["Booker Taliaferro Washington was the successful business man credited with coining the term 'Negro Wall Street', which would come to be known as Black Wall Street. His work as an author was popular and influential to people of many different ideologies. ","The original Booker T. Washington High School was a four-room building located at 507 E. Easton St. built in 1913. This building sustained burns, but is one of few to still stand in survival of the 1921 Race Massacre. "],["Ellis Walker (EW) Woods was the first principal of Greenwood's Booker T. Washington High School. His dedication saw the school through thirty-five years, from 1913 to 1948.","As an activist for equitable, integrated education, Woods built this high school to hold high standard, even accredited by the North Central Association. In 1946 the Governor of Oklahoma even consulted with Woods to plan academic integration in Oklahoma."],["J.B. Stradford was an Indiana University educated lawyer and activist in Greenwood. He built a 55-room luxury hotel bearing his name, the largest Black-owned hotel in the country.","The Stradford Hotel at 301 N. Greenwood was JB’s most well-known business. In the early 1900s, it was the largest Black-owned, Black-operated and Black-guest-only hotel in America, housing fifty-four 'modern living rooms,' a gambling hall, dining room, saloon and pool hall. The hotel had a jazz scene with the Commodore Cotton Club across the street, bringing joy into Greenwood residents’ lives."],["John and Loula Williams were some of Greenwood’s earliest residents, moving to Tulsa in 1903 from Arkansas. In 1912, John opened an auto-repair shop called Williams’ One Stop Garage, at 420 E. Archer St., providing services for both Black and white Tulsa citizens. Here, John, Loula, and their son, Bill, take a ride through Greenwood past local businesses. John was the first in the Greenwood community to own a car. The car, a Chalmers “Thirty Pony Tonneau,” was named because of its 30 horsepower and inline four-cylinder engine. The value of the car was $1,600 in 1911, which would be $53,000 today. The car had a three-speed manual transmission, comfortable leather seats, and a maximum speed of 50 miles per hour.","John was the first in the Greenwood community to own a car. The car, a Chalmers “Thirty Pony Tonneau,” was named because of its 30 horsepower and inline four-cylinder engine. The value of the car was $1,600 in 1911, which would be $53,000 today. The car had a three-speed manual transmission, comfortable leather seats, and a maximum speed of 50 miles per hour."],["From the profits of Williams’ One Stop Garage, the Williams family bought a three-story building, at 102 N. Greenwood Ave. In this building, Loula Williams opened and managed the Williams’ Confectionery on the first floor. The family lived on the second floor, and they rented office space on the third. The confectionery store, a popular hang-out spot, sold candy, ice cream, and featured a fully-stocked soda fountain. In 1914, Loula Williams opened the family-owned movie theatre, Dreamland Theatre, at 127 N. Greenwood St., with an impressive 750 seats. The movie theatre quickly succeeded, with many Greenwood residents regularly showing up to purchase 15-cent tickets.","Loula Williams was an incredibly savvy businesswoman, and not at all under her husband's shadow. An issue of the Tulsa Star in 1914 profiling Greenwood business leaders dedicated separate sections to John and Loula. In 1919, she signed an affidavit declaring sole ownership of the movie theater. She also owned the confectionery herself, having bought the business using her maiden name."],["Mabel Little was a beacon of Black power and resilience, and, after moving to the district in 1913, became known as the 'Matriarch' of Greenwood. With her husband, Pressley, she owned a three-room shotgun house, and ran businesses, such as Little Café and Little Rose Salon, which opened in 1917.","After the Massacre, Mabel Little was instrumental in rebuilding organizations that had been destroyed, such as the Mt. Zion Baptist Church, where she and her husband had been married. 'Life is too short not to be used to help others,' Little said.","At 104 years old, Mabel Little passed away in 2020. Today, the Mabel Little Heritage House, built by the Sam and Lucy Mackey family, stands in honor of her legacy of Black resilience and community."],["O.B. Mann (1923-1997) was the owner of Mann Brothers Grocery alongside his brother, McKinley Mann, and a veteran of the First World War. Mann’s grocery store was a popular gathering place for Greenwood residents. The store was rebuilt following the Massacre, and was in business through the 1950s. In this picture of the market's staff, O.B. Mann can be seen on the far left, standing out from the crowd by his height.","McKinley Mann, pictured on this post card from the Grocery with his wife, Augusta, was a founding member of the Greenwood Chamber of Commerce in 1938. Augusta served on the state Pardon and Parole Board, the first Black woman to do so."],["Dr. Olivia Hooker was born in Oklahoma in 1915. She was one of the oldest known survivors of the Massacre in 1921, and was six years old at the time. Her father owned a clothing store in the Greenwood District. Her family left Tulsa shortly thereafter.","Dr. Olivia Hooker was born in Oklahoma in 1915. She was one of the oldest known survivors of the Massacre in 1921, and was six years old at the time. Her father owned a clothing store in the Greenwood District. Her family left Tulsa shortly thereafter.","Dr. Hooker joined the U.S. Coast Guard in 1945 as part of the women's reserve unit, 'Spars.' She is credited as the first Black woman in the U.S. Coast Guard.","Dr. Hooker earned a Masters in Psychological Services at Columbia University, and a Doctorate in Psychology at the University of Rochester. She began teaching at Fordham University two years after receiving her doctorate, and remained on the faculty for 22 years, specializing in developmental and intellectual disabilities."],["Ottawa (OW) Gurley was a wealthy Black landowner from Arkansas who purchased 40 acres of land in Tulsa, Oklahoma in 1906. Gurley named this area Greenwood, and founded the district that would become the most successful Black Wall Street in America, of its time.","Gurley provided financial and entrepreneurial opportunities to Black Tulsans, selling his property exclusively within the Black community. Thanks to Gurley, Greenwood, Tulsa became home to 600 businesses, 21 churches, 21 restaurants, 30 grocery stores, 2 movie theatres, 6 private airplanes, a hospital, a bank, a post office, schools, libraries, law offices, and even a bus system. ","Ottawa (OW) Gurley was a wealthy Black landowner from Arkansas who purchased 40 acres of land in Tulsa, Oklahoma in 1906. Gurley named this area Greenwood, and founded the district that would become the most successful Black Wall Street in America, of its time.","Gurley provided financial and entrepreneurial opportunities to Black Tulsans, selling his property exclusively within the Black community. Thanks to Gurley, Greenwood, Tulsa became home to 600 businesses, 21 churches, 21 restaurants, 30 grocery stores, 2 movie theatres, 6 private airplanes, a hospital, a bank, a post office, schools, libraries, law offices, and even a bus system. "],["Reverend R.A. Whitaker became the pastor of Mount Zion Baptist Church after the previous pastor, Reverend White, recommended him to the congregation in 1914. In the Spring of 1921, the church was the newest building on the block after a $92,000 investment to move it from its prior location on North Hartford Avenue to N. Elgin Avenue. The church was burned and looted during the massacre less than two months after its first service in the new building. ","Reverend Whitaker and his family worked to aid their community after the 1921 Massacre by distributing aid. The remains of the Mount  Zion Baptist Church are in the background of the photograph. Reverend Whitaker left his position at the church five years later. "],["Simon Berry was born in 1890 in Granada, Mississippi, and moved to Tulsa around 1915, the same year he got married to Alma Pitman in Tulsa.","In 1919, only white people were permitted to use Tulsa’s taxi service. Berry realized that he could make a profit from starting his own transportation service in the Greenwood neighborhood. Berry started with just his own car, but quickly expanded to a service with multiple vehicles. With the profits from the taxi service, Berry bought an auto garage, through which he taught other Black residents about cars and mechanics. Meanwhile, Berry also invested significantly in other Greenwood businesses, and started to buy buses in addition to the jitney service. Many of his students at the auto repair shop became bus drivers in Greenwood.","Berry was one of the first Black citizens of Oklahoma to earn his pilot’s license and he bought a biplane in 1925 with his business partner. Berry had a huge passion for flying. Between the jitneys, buses, eventual air charter service, and mechanic school, Berry employed more Black people than any other person or business in Tulsa."],["S.M. Jackson, originally from Mississippi, opened the Jackson Undertaking Company in Greenwood in 1917 when he was just 23 years old. After the massacre, Jackson Undertaking filed a lawsuit against Tulsa and several prominent figures, such as Tulsa's Mayor and Chief of Police. Wanting to make sure the world knew about the Massacre, Jackson hired Mary E. Jones Parrish to write 'The Events of the Tulsa Disaster' in 1923."]]
+const tulsaStoriesTextArray = [["At 42 years of age, Dr. Andrew Cheesten (AC) Jackson was one of the most successful and talented doctors in the United States, acclaimed by the Mayo Clinic brothers. ", "In 1918, Dr. Jackson established the Booker T. Washington Hospital for Negros, on the corner of Boston Ave. and Archer St. Dr. Jackson was also on the board of directors of the Colored Orphan Home for Tulsa, serving his community in all aspects of his life. "],["A.J. Smitherman was a publisher who founded the Tulsa Star, a Black newspaper headquartered in Greenwood, which was instrumental in establishing the district’s socially-conscious mindset.","Before the Massacre, Smitherman’s properties were valued at more than $40,000. After the Massacre, Smitherman left Tulsa with his family, ending up in Buffalo, New York. In Buffalo, he started a new newspaper, the Buffalo/Empire Star, which ran until shortly after his death in 1961."],["Buck Colbert (BC) Franklin was a lawyer whose career focused on defending the survivors of the Tulsa Race Massacre of 1921 in the rebuilding of Greenwood.","After the Massacre, The Tulsa City Council at first passed a law which prevented the Black Greenwood community to rebuild what had been destroyed. Because of BC Franklin, who led the legal battle before the Oklahoma Supreme Court, Tulsa residents were able to rebuild their community.","Today, the BC Franklin Park stands in honor of the life of this resilient and diligent Black man, and his legacy of working for his community. "],["Booker Taliaferro Washington was the successful business man credited with coining the term 'Negro Wall Street', which would come to be known as Black Wall Street. His work as an author was popular and influential to people of many different ideologies. ","The original Booker T. Washington High School was a four-room building located at 507 E. Easton St. built in 1913. This building sustained burns, but is one of few to still stand in survival of the 1921 Race Massacre. "],["Ellis Walker (EW) Woods was the first principal of Greenwood's Booker T. Washington High School. His dedication saw the school through thirty-five years, from 1913 to 1948.","As an activist for equitable, integrated education, Woods built this high school to hold high standard, even accredited by the North Central Association. In 1946 the Governor of Oklahoma even consulted with Woods to plan academic integration in Oklahoma."],["J.B. Stradford was an Indiana University educated lawyer and activist in Greenwood. He built a 55-room luxury hotel bearing his name, the largest Black-owned hotel in the country.","The Stradford Hotel at 301 N. Greenwood was JB’s most well-known business. In the early 1900s, it was the largest Black-owned, Black-operated and Black-guest-only hotel in America, housing fifty-four 'modern living rooms,' a gambling hall, dining room, saloon and pool hall. The hotel had a jazz scene with the Commodore Cotton Club across the street, bringing joy into Greenwood residents’ lives."],["John and Loula Williams were some of Greenwood’s earliest residents, moving to Tulsa in 1903 from Arkansas. In 1912, John opened an auto-repair shop called Williams’ One Stop Garage, at 420 E. Archer St., providing services for both Black and white Tulsa citizens. Here, John, Loula, and their son, Bill, take a ride through Greenwood past local businesses. John was the first in the Greenwood community to own a car. The car, a Chalmers “Thirty Pony Tonneau,” was named because of its 30 horsepower and inline four-cylinder engine. The value of the car was $1,600 in 1911, which would be $53,000 today. The car had a three-speed manual transmission, comfortable leather seats, and a maximum speed of 50 miles per hour.","John was the first in the Greenwood community to own a car. The car, a Chalmers “Thirty Pony Tonneau,” was named because of its 30 horsepower and inline four-cylinder engine. The value of the car was $1,600 in 1911, which would be $53,000 today. The car had a three-speed manual transmission, comfortable leather seats, and a maximum speed of 50 miles per hour."],["From the profits of Williams’ One Stop Garage, the Williams family bought a three-story building, at 102 N. Greenwood Ave. In this building, Loula Williams opened and managed the Williams’ Confectionery on the first floor. The family lived on the second floor, and they rented office space on the third. The confectionery store, a popular hang-out spot, sold candy, ice cream, and featured a fully-stocked soda fountain. In 1914, Loula Williams opened the family-owned movie theatre, Dreamland Theatre, at 127 N. Greenwood St., with an impressive 750 seats. The movie theatre quickly succeeded, with many Greenwood residents regularly showing up to purchase 15-cent tickets.","Loula Williams was an incredibly savvy businesswoman, and not at all under her husband's shadow. An issue of the Tulsa Star in 1914 profiling Greenwood business leaders dedicated separate sections to John and Loula. In 1919, she signed an affidavit declaring sole ownership of the movie theater. She also owned the confectionery herself, having bought the business using her maiden name."],["Mabel Little was a beacon of Black power and resilience, and, after moving to the district in 1913, became known as the 'Matriarch' of Greenwood. With her husband, Pressley, she owned a three-room shotgun house, and ran businesses, such as Little Café and Little Rose Salon, which opened in 1917.","After the Massacre, Mabel Little was instrumental in rebuilding organizations that had been destroyed, such as the Mt. Zion Baptist Church, where she and her husband had been married. 'Life is too short not to be used to help others,' Little said.","At 104 years old, Mabel Little passed away in 2020. Today, the Mabel Little Heritage House, built by the Sam and Lucy Mackey family, stands in honor of her legacy of Black resilience and community."],["O.B. Mann (1923-1997) was the owner of Mann Brothers Grocery alongside his brother, McKinley Mann, and a veteran of the First World War. Mann’s grocery store was a popular gathering place for Greenwood residents. The store was rebuilt following the Massacre, and was in business through the 1950s. In this picture of the market's staff, O.B. Mann can be seen on the far left, standing out from the crowd by his height.","McKinley Mann, pictured on this post card from the Grocery with his wife, Augusta, was a founding member of the Greenwood Chamber of Commerce in 1938. Augusta served on the state Pardon and Parole Board, the first Black woman to do so."],["Dr. Olivia Hooker was born in Oklahoma in 1915. She was one of the oldest known survivors of the Massacre in 1921, and was six years old at the time. Her father owned a clothing store in the Greenwood District. Her family left Tulsa shortly thereafter.","Dr. Hooker joined the U.S. Coast Guard in 1945 as part of the women's reserve unit, 'Spars.' She is credited as the first Black woman in the U.S. Coast Guard.","Dr. Hooker earned a Masters in Psychological Services at Columbia University, and a Doctorate in Psychology at the University of Rochester. She began teaching at Fordham University two years after receiving her doctorate, and remained on the faculty for 22 years, specializing in developmental and intellectual disabilities."],["Ottawa (OW) Gurley was a wealthy Black landowner from Arkansas who purchased 40 acres of land in Tulsa, Oklahoma in 1906. Gurley named this area Greenwood, and founded the district that would become the most successful Black Wall Street in America, of its time.","Gurley provided financial and entrepreneurial opportunities to Black Tulsans, selling his property exclusively within the Black community. Thanks to Gurley, Greenwood, Tulsa became home to 600 businesses, 21 churches, 21 restaurants, 30 grocery stores, 2 movie theatres, 6 private airplanes, a hospital, a bank, a post office, schools, libraries, law offices, and even a bus system. ","Ottawa (OW) Gurley was a wealthy Black landowner from Arkansas who purchased 40 acres of land in Tulsa, Oklahoma in 1906. Gurley named this area Greenwood, and founded the district that would become the most successful Black Wall Street in America, of its time.","Gurley provided financial and entrepreneurial opportunities to Black Tulsans, selling his property exclusively within the Black community. Thanks to Gurley, Greenwood, Tulsa became home to 600 businesses, 21 churches, 21 restaurants, 30 grocery stores, 2 movie theatres, 6 private airplanes, a hospital, a bank, a post office, schools, libraries, law offices, and even a bus system. "],["Reverend R.A. Whitaker became the pastor of Mount Zion Baptist Church after the previous pastor, Reverend White, recommended him to the congregation in 1914. In the Spring of 1921, the church was the newest building on the block after a $92,000 investment to move it from its prior location on North Hartford Avenue to N. Elgin Avenue. The church was burned and looted during the massacre less than two months after its first service in the new building. ","Reverend Whitaker and his family worked to aid their community after the 1921 Massacre by distributing aid. The remains of the Mount  Zion Baptist Church are in the background of the photograph. Reverend Whitaker left his position at the church five years later. "],["Simon Berry was born in 1890 in Granada, Mississippi, and moved to Tulsa around 1915, the same year he got married to Alma Pitman in Tulsa.","In 1919, only white people were permitted to use Tulsa’s taxi service. Berry realized that he could make a profit from starting his own transportation service in the Greenwood neighborhood. Berry started with just his own car, but quickly expanded to a service with multiple vehicles. With the profits from the taxi service, Berry bought an auto garage, through which he taught other Black residents about cars and mechanics. Meanwhile, Berry also invested significantly in other Greenwood businesses, and started to buy buses in addition to the jitney service. Many of his students at the auto repair shop became bus drivers in Greenwood.","Berry was one of the first Black citizens of Oklahoma to earn his pilot’s license and he bought a biplane in 1925 with his business partner. Berry had a huge passion for flying. Between the jitneys, buses, eventual air charter service, and mechanic school, Berry employed more Black people than any other person or business in Tulsa."],["S.M. Jackson, originally from Mississippi, opened the Jackson Undertaking Company in Greenwood in 1917 when he was just 23 years old. After the massacre, Jackson Undertaking filed a lawsuit against Tulsa and several prominent figures, such as Tulsa's Mayor and Chief of Police. Wanting to make sure the world knew about the Massacre, Jackson hired Mary E. Jones Parrish to write 'The Events of the Tulsa Disaster' in 1923."]]
 
 
 //richmond stories stuff
@@ -253,6 +255,69 @@ arrowUp.onclick = () => {
 
 }
 /**
+ * making timeline to show orb titles
+ */
+
+
+// let comp = window.getComputedStyle(li,pseudoElement)
+
+function timelineCreate(city)
+{
+    timeline.style.display = "block"
+    let TitleText = null
+    let OrbMeshes = null
+
+    if(city === 'richmond') {
+        TitleText = richmondTitleText
+        OrbMeshes = richmondOrbMeshes
+    } else if (city === 'durham'){
+        TitleText = durhamTitleText
+        OrbMeshes = durhamOrbMeshes
+    } else if (city === 'tulsa'){
+        TitleText = tulsaTitleText
+        OrbMeshes = tulsaOrbMeshes
+    }
+
+    while (timeline.hasChildNodes()) {
+        timeline.removeChild(timeline.lastChild);
+    }
+
+    const ul = document.createElement('ul')
+    timeline.appendChild(ul)
+    let li =[]
+
+    for (let i = TitleText.length-1; i >= 0 ; i--){
+        li[i] = document.createElement('li')
+        ul.appendChild(li[i])
+        li[i].setAttribute("orbNames", TitleText[i])
+        
+        li[i].onmouseover = () => {
+            timeline.children[0].children[TitleText.length-1-i].style.background = "black"
+            gsap.to(OrbMeshes[i].position, {  duration: 2, x:-10, y: 0, z: 5, ease: "circ"})
+            
+        }
+        li[i].onmouseout = () => {
+            timeline.children[0].children[TitleText.length-1-i].style.background = "white"
+            gsap.to(OrbMeshes[i].position, {  duration: 2, x: orbPositionsX[i], y:orbPositionsY[i],  z: orbPositionsZ[i], ease: "circ"})
+            //console.log(timeline.children[0].children[i].attributes)
+        }
+
+        if(city === 'richmond'){
+            timeline.children[0].children[TitleText.length-1-i].style.marginLeft = "100px"
+        } else {
+            (timeline.children[0].children[TitleText.length-1-i].style.marginLeft = "70px")
+        } 
+       
+        
+    }
+    // console.log(timeline.children[0].children)
+    
+}
+
+// console.log(timeline)
+
+
+/**
  *   **************** MANAGING ALL THE DIV ELEMENTS CLICK FUNCTIONS ************************
  */
 
@@ -333,6 +398,8 @@ tulsaButton.onclick = () => {
     orbInstruction.style.visibility = "visible"
 
     orbInstruction.innerHTML = "Welcome to Greenwood, Tulsa, Oklahoma. <br> Click on an Orb to learn more about this thriving community"
+
+    timelineCreate('tulsa')
 
    gsap.to(camera.rotation, { duration: 2,  y: Math.PI * 0.5 })
    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
@@ -419,6 +486,9 @@ durhamButton.onclick = () => {
     orbInstruction.style.visibility = "visible"
 
     orbInstruction.innerHTML = "Welcome to Hayti, Durham, North Carolina. <br> Click on an Orb to learn more about this thriving community"
+
+    timeline.style.display= "block"
+    timelineCreate('durham')
 
    gsap.to(camera.rotation, { duration: 2,  y: Math.PI * 0.5 })
    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
@@ -507,6 +577,10 @@ richmondButton.onclick = () => {
 
     orbInstruction.innerHTML = "Welcome to Jackson Ward, Richmond, Virginia. <br> Click on an Orb to learn more about this thriving community"
 
+
+    timeline.style.display= "block"
+    timelineCreate('richmond')
+
    gsap.to(camera.rotation, { duration: 2,  y: Math.PI * 0.5 })
    gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
 
@@ -594,6 +668,7 @@ backButton.onclick = () => {
     landingPage = true
     orbInstruction.style.visibility = "hidden"
     cityButton.style.visibility = "hidden"
+    timeline.style.display = "none"
     
     if(storyImageLarge){
         storyImageDiv.classList.toggle('open')
@@ -1176,6 +1251,8 @@ window.addEventListener('click', () => {
                     clickFlag = 0
                     storyDiv.style.opacity = "0"
                     window.setTimeout(() => {storyDiv.style.visibility = "hidden"; storyDiv.style.display = "none"}, 550)
+                    orbInstruction.innerHTML = "Welcome to Jackson Ward, Richmond, Virginia. <br> Click on an Orb to learn more about this thriving community"
+                    timeline.style.display = "block"
                 } else if(clickFlag == 0 ) { 
                     storyDivLoader("richmond", i)
                     storyDiv.style.display = "block"
@@ -1186,6 +1263,11 @@ window.addEventListener('click', () => {
                     gsap.to(richmondOrbMeshes[i].rotation, {  duration: 2, x:0, y: Math.PI * 2, z: 0, ease: "circ"})
                     gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
                     gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
+
+                    
+                    orbInstruction.innerHTML = " click on the orb to return to the gallery"
+                    timeline.style.display = "none"
+    
                     
                     clickFlag = 1
                 }
@@ -1223,7 +1305,11 @@ window.addEventListener('click', () => {
                     clickFlag = 0
                     storyDiv.style.opacity = "0"
                     window.setTimeout(() => {storyDiv.style.visibility = "hidden"; storyDiv.style.display = "none"}, 550)
-                } else if(clickFlag == 0 ) { 
+                    orbInstruction.innerHTML = "Welcome to Hayti, Durham, North Carolina. <br> Click on an Orb to learn more about this thriving community"
+                    timeline.style.display = "block"
+                } 
+                else if(clickFlag == 0 ) 
+                { 
                     storyDivLoader("durham", i)
                     storyDiv.style.display = "block"
                     window.setTimeout(() => {storyDiv.style.opacity = "1"; storyDiv.style.visibility = "visible"}, 550)
@@ -1233,6 +1319,9 @@ window.addEventListener('click', () => {
                     gsap.to(durhamOrbMeshes[i].rotation, {  duration: 2, x:0, y: Math.PI * 2, z: 0, ease: "circ"})
                     gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
                     gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
+
+                    orbInstruction.innerHTML = " click on the orb to return to the gallery"
+                    timeline.style.display = "none"
                     
                     clickFlag = 1
                 }
@@ -1269,7 +1358,12 @@ window.addEventListener('click', () => {
                     clickFlag = 0
                     storyDiv.style.opacity = "0"
                     window.setTimeout(() => {storyDiv.style.visibility = "hidden"; storyDiv.style.display = "none"}, 550)
-                } else if(clickFlag == 0 ) { 
+
+                    orbInstruction.innerHTML = "Welcome to Greenwood, Tulsa, Oklahoma. <br> Click on an Orb to learn more about this thriving community"
+                    timeline.style.display = "block"
+                } 
+                else if(clickFlag == 0 ) 
+                { 
                     storyDivLoader("tulsa", i)
                     storyDiv.style.display = "block"
                     window.setTimeout(() => {storyDiv.style.opacity = "1"; storyDiv.style.visibility = "visible"}, 550)
@@ -1279,6 +1373,9 @@ window.addEventListener('click', () => {
                     gsap.to(tulsaOrbMeshes[i].rotation, {  duration: 2, x:0, y: Math.PI * 2, z: 0, ease: "circ"})
                     gsap.to(camera.position, { duration: 2,  x: 0, y: 0, z: 3.867})
                     gsap.to(camera.rotation, { duration: 2,  x: 0, z: 0, y: Math.PI * 0.5 })
+
+                    orbInstruction.innerHTML = " click on the orb to return to the gallery"
+                    timeline.style.display = "none"
                     
                     clickFlag = 1
                 }
