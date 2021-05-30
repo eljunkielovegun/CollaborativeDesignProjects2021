@@ -84,10 +84,10 @@ body
 {
   font-family: roboto, sans-serif;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   text-align: center;
   padding: 2px 20px;
-  width: 300px;
+  width: 450px;
   /* height: 50px; */
   border:none;
   border:solid 1px black;
@@ -104,11 +104,82 @@ body
   -o-transition: .4s ease-in-out;
   transition: .4s ease-in-out;
   z-index: 2;
+  -webkit-animation: breathing 15s ease-out infinite normal;
+  animation: breathing 15s ease-out infinite normal;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+@-webkit-keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  20% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  20% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 }
 
 #button:hover
 {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0px 0px 25px 25px rgba(0,0,0,0.2), 0px 0px 25px 25px rgba(0,0,0,0.2);
+  animation-play-state: paused;
   padding-right: 25px;
   padding-left: 25px;
 }
@@ -423,7 +494,7 @@ font-size: 150%;
   opacity: 0;
   transition: .5s;
   z-index: 2;
-  cursor: pointer;
+  cursor: zoom-in;
   /* background-color: aqua; */
 }
 
@@ -432,6 +503,7 @@ font-size: 150%;
   bottom: 30%;
   right: 50%;
   transform: scale(2);
+  cursor: zoom-out;
  
 }
 
@@ -553,9 +625,9 @@ border-width: thin;
 {
   position: absolute;
   top:0;
-  left: 2%;
-  height:80px;
-  width: 110px;
+  left: 1.5%;
+  height:40px;
+  width: 55px;
   text-align: center;
   padding-top: 5px;
   padding-left: 5px;
@@ -582,8 +654,8 @@ border-width: thin;
   position: absolute;
   bottom: 2%;
   left: 2%;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
 z-index: 2;
 cursor: pointer;
 }
