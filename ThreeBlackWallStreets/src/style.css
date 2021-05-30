@@ -238,6 +238,32 @@ body
 
 }
 
+.designNames
+{
+  visibility: hidden;
+    background-color: rgba(79, 44, 16, 0.6);
+    /* height: 1.2em; */
+    /* width: 100%; */
+    margin-top: -3.7em;
+    float: top;
+    text-align: center;
+    color: white;
+    z-index: 3;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 150%; 
+   
+     position: absolute;
+     padding-left: 5px;
+     width: 123px;
+    
+     -webkit-transition: .4s ease-in-out;
+     -moz-transition: .4s ease-in-out;
+     -o-transition: .4s ease-in-out;
+     transition: .4s ease-in-out;
+
+}
+
 
 
 #nav-icon {
@@ -465,6 +491,8 @@ font-size: 150%;
  -moz-transition: .4s ;
  -o-transition: .4s ;
  transition: .4s ;
+ height: 325px;
+ overflow-y: auto;
  
 }
 
