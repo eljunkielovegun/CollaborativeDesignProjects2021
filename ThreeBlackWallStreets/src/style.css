@@ -504,7 +504,7 @@ font-size: 150%;
  -moz-transition: .4s ;
  -o-transition: .4s ;
  transition: .4s ;
- height: 300px;
+ height: 250px;
  overflow-y: auto;
  
 }
@@ -550,117 +550,63 @@ font-size: 150%;
 
 .arrows
 {
-  width: 200px;
-  height: 100px;
-  transform: scale(0.35, 0.35);
+  width: 400px;
+  height: 50px;
+  /* transform: scale(0.35, 0.35); */
   position: absolute;
   white-space:nowrap;
+  text-align: center;
+  font-family: roboto, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 75%;
 
-  left: 80%;
-  bottom: 1%;
+  left: 75%;
+  bottom: 5%;
   z-index: 2;
+}
+
+.storyCount
+{
+  text-align: center;
+  font-family: roboto, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 100%;
+  position: relative;
+  /* float: left; */
 }
 
 .arrowUp{
   width: 100px;
-  height: 100px;
+  height: 50px;
   margin: 20px;
   display: inline-block;
   position: relative;
-  /* left: 75%; */
-  text-align: left;
-  /* right: 8%; */
+  
   bottom:0;
   background: transparent;
-  border-radius: 50%;
+  border-radius: 2%;
   border-style: solid;
   border-width: thin;
 
 }
 
-.arrowUp:before {
-  content: '';
-  display: block;
-  width: 30px;
-  height: 30px;
-  top: 50%;
-  left: 50%;
-  border-style: solid;
-  border-color: #000;
-  border-width: 2px 2px 0 0;
-  position: absolute;
-  transform-origin: 50% 50%;
-
-  transform: rotate(-45deg); 
-    margin: -10px 0 0 -15px;
-}
-
-.arrowUp:after {
-  content: '';
-  display: block;
-  top: 50%;
-  left: 50%;
-  border-style: solid;
-  border-color: #000;
-  position: absolute;
-  transform-origin: 50% 50%;
-
-  width: 0;
-  height: 40px;
-  border-width: 0 2px 0 0;
-  transform: translate(0px, -10px);
-}
-    
  
 .arrowDown{
   width: 100px;
-  height: 100px;
+  height: 50px;
   margin: 20px;
   bottom:0;
   display: inline-block;
   position: relative;
   
-  text-align: right;
-  /* right: 5%; */
  
   background: transparent;
-  border-radius: 50%;
+  border-radius: 2%;
   border-style: solid;
 border-width: thin;
  } 
- .arrowDown:before {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 30px;
-    top: 50%;
-    left: 50%;
-    border-style: solid;
-    border-color: #000;
-    border-width: 2px 2px 0 0;
-    position: absolute;
-    transform-origin: 50% 50%;
-
-    transform: rotate(135deg); 
-    margin: -20px 0 0 -15px;
-  } 
-
-.arrowDown:after {
-    content: '';
-    display: block;
-    top: 50%;
-    left: 50%;
-    border-style: solid;
-    border-color: #000;
-    position: absolute;
-    transform-origin: 50% 50%;
-
-    width: 0;
-    height: 40px;
-    border-width: 0 2px 0 0;
-    transform: translate(0px, -30px);
-  }  
-
 
 .backButton
 {
@@ -726,7 +672,7 @@ cursor: pointer;
     bottom: 3%;
     left: 50%;
     transform: translate(-50%);
-    width:75%;
+    width:100%;
     height: 20px;
     list-style: none;
     text-align: justify;
@@ -750,7 +696,7 @@ cursor: pointer;
 	line-height: 1.2;
 	position: relative;
 	border-radius: 50%;
-  margin-left: 70px;
+  margin-left: 100px;
   left:0;
 }
 .timeline li:before {
