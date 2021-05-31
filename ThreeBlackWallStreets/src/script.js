@@ -362,7 +362,7 @@ function timelineCreate(city)
         if(city === 'richmond'){
             timeline.children[0].children[TitleText.length-1-i].style.marginLeft = "130px"
         } else {
-            (timeline.children[0].children[TitleText.length-1-i].style.marginLeft = "90px")
+            (timeline.children[0].children[TitleText.length-1-i].style.marginLeft = "100px")
         } 
        
         
