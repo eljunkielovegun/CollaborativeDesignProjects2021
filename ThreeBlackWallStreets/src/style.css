@@ -398,7 +398,7 @@ body
 {
 
 border-style: solid;
-border-width: thick;
+border-width: thin;
 
   position: absolute;
   font-family: sans-serif;
@@ -423,7 +423,7 @@ border-width: thick;
   transform: skewY(-45deg);
   overflow-y: auto;
   background: #ffffff;
-  z-index: -1;
+  z-index: 0;
   
 }
 
