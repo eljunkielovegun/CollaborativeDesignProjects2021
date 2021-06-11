@@ -162,7 +162,7 @@ for(let i =0; i < designTeamNamesArray.length; i++){
     }
 }
 
-const researchTeamNamesArray = ["Maren (Pepper) Magyar", "Maeve Curran","Deja Nycole","Malin Hillemann","Alexis Emerson","Nora Neely","Maggie Walsh","Andrew Kastner" ]
+const researchTeamNamesArray = ["Maren (Pepper) Magyar", "Maeve Curran","Deja Nycole","Malin Hillemann","Alexis Emerson","Nora Neely","Maggie Walsh","Andrew Kastner", "Hadley Chittum"  ]
 let researchTeamImg = []
 let researchTeamNameDiv = []
 let researchImageWrapperDiv = []
